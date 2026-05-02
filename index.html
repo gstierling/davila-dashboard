@@ -30,6 +30,10 @@
   .logo-dot-wrap { display:flex; justify-content:center; margin-bottom:10px; }
   .logo-dot { width:10px; height:10px; border-radius:50%; background:var(--accent); box-shadow:0 0 12px var(--accent); animation:pulse 2s ease-in-out infinite; }
   @keyframes pulse { 0%,100%{box-shadow:0 0 8px var(--accent);opacity:1} 50%{box-shadow:0 0 22px var(--accent);opacity:0.7} }
+
+  .title-davila { font-size:48px; font-weight:800; letter-spacing:1px; color:#ffffff; line-height:1.1; margin-bottom:4px; }
+  .title-sub { font-size:22px; font-weight:600; color:rgba(255,255,255,0.7); margin-bottom:4px; }
+  .title-sub span { color:var(--accent); font-weight:800; }
   h1 { font-size:24px; font-weight:800; }
   h1 span { color:var(--accent); }
   .subtitle { font-size:13px; color:rgba(255,255,255,0.55); margin-top:4px; }
@@ -37,16 +41,16 @@
   .live-dot { width:7px; height:7px; border-radius:50%; background:var(--accent); animation:pulse 1.5s ease-in-out infinite; }
   #last-update { font-size:11px; color:rgba(255,255,255,0.4); margin-top:6px; }
 
-  #fecha-actual { font-size:17px; font-weight:700; color:#ffffff; margin-bottom:14px; text-transform:capitalize; }
+  #fecha-actual { font-size:26px; font-weight:700; color:#f97316; margin-bottom:14px; text-transform:capitalize; }
 
   #error-banner { display:none; background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.3); border-radius:10px; padding:12px 18px; margin-bottom:20px; font-size:13px; color:#fca5a5; }
 
   .card { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:24px 20px; margin-bottom:18px; }
-  .card-title { font-size:16px; font-weight:800; text-transform:uppercase; color:#ffffff; margin-bottom:18px; letter-spacing:0.4px; }
+  .card-title { font-size:24px; font-weight:800; text-transform:uppercase; color:#ffffff; margin-bottom:18px; letter-spacing:0.4px; }
 
   .kpi-single { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:28px 20px; margin-bottom:18px; position:relative; overflow:hidden; }
   .kpi-single::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; border-radius:16px 16px 0 0; background:linear-gradient(90deg,var(--accent),var(--accent2)); }
-  .kpi-single .kpi-label { font-size:16px; font-weight:800; text-transform:uppercase; color:#ffffff; margin-bottom:12px; letter-spacing:0.4px; }
+  .kpi-single .kpi-label { font-size:24px; font-weight:800; text-transform:uppercase; color:#ffffff; margin-bottom:12px; letter-spacing:0.4px; }
   .kpi-single .kpi-value { font-size:80px; font-weight:800; line-height:1; color:var(--accent); }
   .kpi-single .kpi-sub { font-size:14px; color:#ffffff; margin-top:8px; font-weight:600; }
 
@@ -56,7 +60,7 @@
   .kpi-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; border-radius:16px 16px 0 0; }
   .kpi-card.green::before { background:linear-gradient(90deg,#22c55e,transparent); }
   .kpi-card.amber::before { background:linear-gradient(90deg,var(--accent3),transparent); }
-  .kpi-label { font-size:15px; font-weight:800; text-transform:uppercase; color:#ffffff; margin-bottom:10px; letter-spacing:0.3px; }
+  .kpi-label { font-size:23px; font-weight:800; text-transform:uppercase; color:#ffffff; margin-bottom:10px; letter-spacing:0.3px; }
   .kpi-value { font-size:52px; font-weight:800; line-height:1; }
   .kpi-card.green .kpi-value { color:#22c55e; }
   .kpi-card.amber .kpi-value { color:var(--accent3); font-size:24px; padding-top:6px; }
@@ -81,8 +85,8 @@
   @keyframes fadeIn{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
   .tl-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex-shrink:0}
   .tl-name{font-weight:700;flex:1;color:#ffffff}
-  .tl-sede{font-size:11px;color:rgba(255,255,255,0.7);flex:1.5}
-  .tl-time{font-size:11px;color:rgba(255,255,255,0.6);flex-shrink:0}
+  .tl-sede{font-size:14px;color:#ffffff;flex:1.5}
+  .tl-time{font-size:14px;color:#ffffff;flex-shrink:0}
 
   .count-badge { display:inline-block; background:var(--accent); color:#0a0e1a; font-size:56px; font-weight:800; border-radius:16px; padding:12px 40px; }
 
@@ -96,7 +100,7 @@
 
   <header>
     <div class="logo-dot-wrap"><div class="logo-dot"></div></div>
-    <h1>Dávila en <span>CicloRecreoVía</span></h1>
+    <h1 class="title-davila">DÁVILA</h1><h2 class="title-sub">en <span>CicloRecreoVía</span></h2>
     <div class="subtitle">Dashboard de registros en tiempo real</div>
     <div class="refresh-badge"><div class="live-dot"></div><span>Auto-refresh 30s</span></div>
     <div id="last-update">Cargando...</div>
@@ -146,14 +150,29 @@
 
   <!-- 6. ULTIMOS 30 MINUTOS -->
   <div class="card">
-    <div class="card-title">Registros últimos 30 minutos</div>
+    <div class="card-title">Registros últimos <span style="color:#f97316">30</span> minutos</div>
     <div class="count-badge" id="count-30">—</div>
   </div>
 
   <!-- 7. ULTIMOS 60 MINUTOS -->
   <div class="card">
-    <div class="card-title">Registros últimos 60 minutos</div>
+    <div class="card-title">Registros últimos <span style="color:#f97316">60</span> minutos</div>
     <div class="count-badge" id="count-60">—</div>
+  </div>
+
+
+  <!-- LINKS -->
+  <div style="display:flex;justify-content:center;gap:24px;margin:24px 0 8px;">
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdiKZr5H_wMLyKWqrLNTd75SL4xqeFlHjeoVkmW9C0ae3_wSA/viewform"
+       target="_blank"
+       style="display:inline-block;background:#f97316;color:#0a0e1a;font-family:Nunito,sans-serif;font-size:18px;font-weight:800;padding:14px 32px;border-radius:12px;text-decoration:none;letter-spacing:0.3px;">
+      Formulario
+    </a>
+    <a href="https://docs.google.com/spreadsheets/d/1qPi-cWSQcdvUX5ZS-kXFoyGeXhgX9iTxfPcpUz_vI2M/edit?usp=sharing"
+       target="_blank"
+       style="display:inline-block;background:var(--surface2);border:1px solid var(--border);color:#ffffff;font-family:Nunito,sans-serif;font-size:18px;font-weight:800;padding:14px 32px;border-radius:12px;text-decoration:none;letter-spacing:0.3px;">
+      Base de datos
+    </a>
   </div>
 
   <footer id="footer-info">Cargando...</footer>
@@ -163,7 +182,7 @@
 var CSV_URL = "https://docs.google.com/spreadsheets/d/1qPi-cWSQcdvUX5ZS-kXFoyGeXhgX9iTxfPcpUz_vI2M/gviz/tq?tqx=out:csv&gid=2028590628";
 var REFRESH_MS = 30000;
 var prevTotal = null;
-var COLORS = ["#00d4aa","#f97316","#eab308","#a78bfa","#f43f5e","#e879f9","#fb923c","#38bdf8"];
+var COLORS = ["#a3e635","#f97316","#eab308","#a78bfa","#f43f5e","#e879f9","#fb923c","#38bdf8"];
 
 // Parser de fecha formato chileno: "1/5/2026 10:13:41" o "01/05/2026 10:13:41"
 // Google Sheets en es-CL exporta D/M/YYYY H:MM:SS
