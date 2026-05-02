@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard Registros · Clínica Dávila</title>
+<title>Dashboard Registros Clinica Davila</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
@@ -16,7 +16,6 @@
     --accent3: #f59e0b;
     --text: #f1f5f9;
     --muted: #64748b;
-    --danger: #ef4444;
   }
   * { margin:0; padding:0; box-sizing:border-box; }
   body {
@@ -26,8 +25,6 @@
     min-height: 100vh;
     padding: 32px 24px;
   }
-
-  /* Subtle grid background */
   body::before {
     content: '';
     position: fixed;
@@ -39,23 +36,15 @@
     pointer-events: none;
     z-index: 0;
   }
-
   .container { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
-
-  /* Header */
   header {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-start;
-    margin-bottom: 36px;
-    flex-wrap: wrap;
-    gap: 16px;
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 36px; flex-wrap: wrap; gap: 16px;
   }
   .brand { display: flex; align-items: center; gap: 14px; }
   .logo-dot {
     width: 10px; height: 10px; border-radius: 50%;
-    background: var(--accent);
-    box-shadow: 0 0 12px var(--accent);
+    background: var(--accent); box-shadow: 0 0 12px var(--accent);
     animation: pulse 2s ease-in-out infinite;
   }
   @keyframes pulse {
@@ -65,10 +54,7 @@
   h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; }
   h1 span { color: var(--accent); }
   .subtitle { font-size: 13px; color: var(--muted); margin-top: 3px; font-weight: 300; }
-
-  .status-bar {
-    display: flex; flex-direction: column; align-items: flex-end; gap: 6px;
-  }
+  .status-bar { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
   .refresh-badge {
     display: flex; align-items: center; gap: 7px;
     background: var(--surface2); border: 1px solid var(--border);
@@ -77,106 +63,83 @@
   }
   .live-dot {
     width: 7px; height: 7px; border-radius: 50%;
-    background: var(--accent);
-    animation: pulse 1.5s ease-in-out infinite;
+    background: var(--accent); animation: pulse 1.5s ease-in-out infinite;
   }
   #last-update { font-size: 11px; color: var(--muted); font-family: 'DM Mono', monospace; }
-
-  /* Error banner */
   #error-banner {
     display: none;
     background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3);
     border-radius: 10px; padding: 12px 18px; margin-bottom: 20px;
     font-size: 13px; color: #fca5a5;
   }
-
-  /* KPI grid */
   .kpi-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 16px;
-    margin-bottom: 28px;
+    gap: 16px; margin-bottom: 28px;
   }
   .kpi-card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 24px 22px;
-    position: relative;
-    overflow: hidden;
-    transition: border-color 0.3s;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 24px 22px;
+    position: relative; overflow: hidden;
   }
   .kpi-card::before {
-    content: '';
-    position: absolute;
-    top: 0; left: 0; right: 0;
-    height: 2px;
-    border-radius: 16px 16px 0 0;
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 2px; border-radius: 16px 16px 0 0;
   }
-  .kpi-card.teal::before { background: linear-gradient(90deg, var(--accent), transparent); }
-  .kpi-card.blue::before { background: linear-gradient(90deg, var(--accent2), transparent); }
+  .kpi-card.teal::before  { background: linear-gradient(90deg, var(--accent), transparent); }
+  .kpi-card.blue::before  { background: linear-gradient(90deg, var(--accent2), transparent); }
   .kpi-card.amber::before { background: linear-gradient(90deg, var(--accent3), transparent); }
   .kpi-card.green::before { background: linear-gradient(90deg, #22c55e, transparent); }
-
-  .kpi-label { font-size: 11px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
+  .kpi-label {
+    font-size: 11px; font-weight: 600; letter-spacing: 1.2px;
+    text-transform: uppercase; color: var(--muted); margin-bottom: 10px;
+  }
   .kpi-value {
     font-size: 48px; font-weight: 700; letter-spacing: -2px; line-height: 1;
-    font-family: 'DM Mono', monospace;
-    transition: all 0.4s ease;
+    font-family: 'DM Mono', monospace; transition: all 0.4s ease;
   }
-  .kpi-card.teal .kpi-value { color: var(--accent); }
-  .kpi-card.blue .kpi-value { color: var(--accent2); }
+  .kpi-card.teal  .kpi-value { color: var(--accent); }
+  .kpi-card.blue  .kpi-value { color: var(--accent2); }
   .kpi-card.amber .kpi-value { color: var(--accent3); }
   .kpi-card.green .kpi-value { color: #22c55e; }
   .kpi-sub { font-size: 12px; color: var(--muted); margin-top: 6px; font-weight: 300; }
-
-  .kpi-flash {
-    animation: flash 0.6s ease;
-  }
-  @keyframes flash {
-    0% { transform: scale(1.08); }
-    100% { transform: scale(1); }
-  }
-
-  /* Two column layout */
+  @keyframes flash { 0% { transform: scale(1.08); } 100% { transform: scale(1); } }
+  .kpi-flash { animation: flash 0.6s ease; }
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
   @media (max-width: 700px) { .grid-2 { grid-template-columns: 1fr; } }
-
   .card {
-    background: var(--surface);
-    border: 1px solid var(--border);
-    border-radius: 16px;
-    padding: 24px;
+    background: var(--surface); border: 1px solid var(--border);
+    border-radius: 16px; padding: 24px;
   }
   .card-title {
     font-size: 11px; font-weight: 600; letter-spacing: 1.2px;
     text-transform: uppercase; color: var(--muted); margin-bottom: 20px;
   }
-
-  /* Bar chart */
   .bar-list { display: flex; flex-direction: column; gap: 14px; }
   .bar-item { display: flex; flex-direction: column; gap: 6px; }
   .bar-meta { display: flex; justify-content: space-between; align-items: baseline; }
-  .bar-name { font-size: 13px; color: var(--text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 75%; }
+  .bar-name {
+    font-size: 13px; color: var(--text);
+    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 75%;
+  }
   .bar-count { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--accent); font-weight: 500; }
   .bar-track { height: 6px; background: var(--surface2); border-radius: 3px; overflow: hidden; }
   .bar-fill {
     height: 100%; border-radius: 3px;
     background: linear-gradient(90deg, var(--accent), var(--accent2));
-    transition: width 0.7s cubic-bezier(0.4,0,0.2,1);
-    width: 0%;
+    transition: width 0.7s cubic-bezier(0.4,0,0.2,1); width: 0%;
   }
-
-  /* Timeline */
-  .timeline-list { display: flex; flex-direction: column; gap: 10px; max-height: 280px; overflow-y: auto; }
+  .timeline-list {
+    display: flex; flex-direction: column; gap: 10px;
+    max-height: 280px; overflow-y: auto;
+  }
   .timeline-list::-webkit-scrollbar { width: 4px; }
-  .timeline-list::-webkit-scrollbar-track { background: var(--surface2); border-radius: 2px; }
+  .timeline-list::-webkit-scrollbar-track { background: var(--surface2); }
   .timeline-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
   .tl-item {
     display: flex; align-items: center; gap: 12px;
-    padding: 10px 12px;
-    background: var(--surface2); border-radius: 10px;
-    font-size: 13px;
+    padding: 10px 12px; background: var(--surface2);
+    border-radius: 10px; font-size: 13px;
     animation: fadeIn 0.4s ease;
   }
   @keyframes fadeIn { from { opacity:0; transform: translateY(-6px); } to { opacity:1; transform: translateY(0); } }
@@ -184,58 +147,45 @@
   .tl-name { font-weight: 600; flex: 1; }
   .tl-sede { font-size: 11px; color: var(--muted); flex: 1.5; }
   .tl-time { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); flex-shrink:0; }
-
-  /* Mini chart de registros por hora */
   .hour-chart { display: flex; align-items: flex-end; gap: 4px; height: 70px; padding-top: 8px; }
   .hour-bar-wrap { display: flex; flex-direction: column; align-items: center; flex: 1; gap: 4px; }
   .hour-bar {
-    width: 100%; border-radius: 3px 3px 0 0;
-    background: var(--accent2);
-    opacity: 0.7;
-    transition: height 0.7s cubic-bezier(0.4,0,0.2,1);
-    min-height: 2px;
+    width: 100%; border-radius: 3px 3px 0 0; background: var(--accent2);
+    opacity: 0.7; transition: height 0.7s cubic-bezier(0.4,0,0.2,1); min-height: 2px;
   }
   .hour-label { font-size: 9px; color: var(--muted); font-family: 'DM Mono', monospace; }
-
-  /* Footer */
   footer {
     margin-top: 28px; text-align: center;
-    font-size: 11px; color: var(--muted);
-    font-family: 'DM Mono', monospace;
+    font-size: 11px; color: var(--muted); font-family: 'DM Mono', monospace;
   }
-
-  /* Loading skeleton */
   .skeleton {
     background: linear-gradient(90deg, var(--surface2) 25%, var(--surface) 50%, var(--surface2) 75%);
-    background-size: 200% 100%;
-    animation: shimmer 1.5s infinite;
-    border-radius: 4px;
-    height: 48px; width: 60%;
+    background-size: 200% 100%; animation: shimmer 1.5s infinite;
+    border-radius: 4px; height: 48px; width: 60%;
   }
   @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
 </style>
 </head>
 <body>
 <div class="container">
-
   <header>
     <div class="brand">
       <div class="logo-dot"></div>
       <div>
-        <h1>Puntos <span>Dávila</span></h1>
+        <h1>Puntos <span>Davila</span></h1>
         <div class="subtitle">Dashboard de registros en tiempo real</div>
       </div>
     </div>
     <div class="status-bar">
       <div class="refresh-badge">
         <div class="live-dot"></div>
-        <span>Actualización automática · 30s</span>
+        <span>Auto-refresh 30s</span>
       </div>
       <div id="last-update">Cargando...</div>
     </div>
   </header>
 
-  <div id="error-banner">⚠ No se pudo cargar la fuente de datos. Reintentando...</div>
+  <div id="error-banner">No se pudo cargar la fuente de datos. Reintentando...</div>
 
   <div class="kpi-grid">
     <div class="kpi-card teal">
@@ -249,8 +199,8 @@
       <div class="kpi-sub" id="kpi-sedes-sub">&nbsp;</div>
     </div>
     <div class="kpi-card amber">
-      <div class="kpi-label">Último registro</div>
-      <div class="kpi-value" id="kpi-last" style="font-size:20px; padding-top:8px"><div class="skeleton"></div></div>
+      <div class="kpi-label">Ultimo registro</div>
+      <div class="kpi-value" id="kpi-last" style="font-size:20px;padding-top:8px"><div class="skeleton"></div></div>
       <div class="kpi-sub" id="kpi-last-sub">&nbsp;</div>
     </div>
     <div class="kpi-card green">
@@ -266,7 +216,7 @@
       <div class="bar-list" id="bar-sedes"></div>
     </div>
     <div class="card">
-      <div class="card-title">Últimos registros</div>
+      <div class="card-title">Ultimos registros</div>
       <div class="timeline-list" id="timeline"></div>
     </div>
   </div>
@@ -276,170 +226,182 @@
     <div class="hour-chart" id="hour-chart"></div>
   </div>
 
-  <footer id="footer-info">—</footer>
+  <footer id="footer-info">Cargando...</footer>
 </div>
 
 <script>
-const CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQWCapo26aj0cGqq_l1NLdkvhDwm-EmsQW9KD_jrTso_V9-akG2JQi09Eq-1yrgq0dWlNEPETx11LJz/pub?gid=2028590628&single=true&output=csv";
-const REFRESH_MS = 30000;
-let prevTotal = null;
+// Columnas por indice (0-based):
+// 0=Marca temporal, 1=Nombre, 2=Correo, 3=Celular, 4=Acepto contacto, 5=Punto Davila
+var CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQWCapo26aj0cGqq_l1NLdkvhDwm-EmsQW9KD_jrTso_V9-akG2JQi09Eq-1yrgq0dWlNEPETx11LJz/pub?gid=2028590628&single=true&output=csv";
+var REFRESH_MS = 30000;
+var prevTotal = null;
+
+var PROXIES = [
+  function(u) { return "https://corsproxy.io/?" + encodeURIComponent(u); },
+  function(u) { return "https://api.allorigins.win/raw?url=" + encodeURIComponent(u); },
+  function(u) { return "https://api.codetabs.com/v1/proxy?quest=" + encodeURIComponent(u); }
+];
+
+function splitLine(line) {
+  var cols = [], cur = "", inQ = false;
+  for (var i = 0; i < line.length; i++) {
+    var ch = line[i];
+    if (ch === '"') { inQ = !inQ; continue; }
+    if (ch === ',' && !inQ) { cols.push(cur.trim()); cur = ""; continue; }
+    cur += ch;
+  }
+  cols.push(cur.trim());
+  return cols;
+}
 
 function parseCSV(text) {
-  const lines = text.trim().split('\n').filter(l => l.trim());
-  if (lines.length < 2) return [];
-  const headers = lines[0].split(',').map(h => h.trim().replace(/^"|"$/g,''));
-  return lines.slice(1).map(line => {
-    // Handle quoted fields
-    const cols = [];
-    let cur = '', inQ = false;
-    for (let i = 0; i < line.length; i++) {
-      if (line[i] === '"') { inQ = !inQ; continue; }
-      if (line[i] === ',' && !inQ) { cols.push(cur.trim()); cur = ''; continue; }
-      cur += line[i];
-    }
-    cols.push(cur.trim());
-    const obj = {};
-    headers.forEach((h, i) => obj[h] = cols[i] || '');
-    return obj;
-  }).filter(r => r[headers[0]]); // skip empty rows
+  var lines = text.trim().split('\n');
+  var rows = [];
+  for (var i = 1; i < lines.length; i++) {
+    var line = lines[i].trim();
+    if (!line) continue;
+    var cols = splitLine(line);
+    if (cols.length < 2 || !cols[0]) continue;
+    rows.push(cols);
+  }
+  return rows;
+}
+
+function isValidCSV(text) {
+  if (!text || text.length < 20) return false;
+  var first = text.split('\n')[0];
+  return first.split(',').length >= 3;
 }
 
 function setKPI(id, val, animate) {
-  const el = document.getElementById(id);
-  el.innerHTML = val;
-  if (animate) {
-    el.classList.remove('kpi-flash');
-    void el.offsetWidth;
-    el.classList.add('kpi-flash');
-  }
+  var el = document.getElementById(id);
+  el.innerHTML = String(val);
+  if (animate) { el.classList.remove('kpi-flash'); void el.offsetWidth; el.classList.add('kpi-flash'); }
 }
 
-function shortName(full) {
-  if (!full) return '—';
-  const parts = full.trim().split(' ');
-  return parts[0];
+function shortName(s) {
+  if (!s) return "-";
+  return s.trim().split(' ')[0];
 }
 
-function formatTime(str) {
-  if (!str) return '';
-  // Format: M/D/YYYY H:MM:SS
-  const d = new Date(str);
-  if (isNaN(d)) return str;
+function formatTime(s) {
+  if (!s) return '';
+  var d = new Date(s);
+  if (isNaN(d.getTime())) return s;
   return d.toLocaleTimeString('es-CL', {hour:'2-digit', minute:'2-digit'});
 }
 
-function shortSede(sede) {
-  if (!sede) return '—';
-  const m = sede.match(/^([^(]+)/);
-  return m ? m[1].trim() : sede;
+function shortSede(s) {
+  if (!s || !s.trim()) return "-";
+  var m = s.match(/^([^(]+)/);
+  return m ? m[1].trim() : s.trim();
 }
 
 async function fetchData() {
-  try {
-    const proxy = 'https://api.allorigins.win/raw?url=' + encodeURIComponent(CSV_URL);
-    const res = await fetch(proxy);
-    if (!res.ok) throw new Error('HTTP ' + res.status);
-    const text = await res.text();
-    document.getElementById('error-banner').style.display = 'none';
-    return parseCSV(text);
-  } catch(e) {
-    document.getElementById('error-banner').style.display = 'block';
-    return null;
+  for (var p = 0; p < PROXIES.length; p++) {
+    try {
+      var proxyUrl = PROXIES[p](CSV_URL);
+      var res = await fetch(proxyUrl, {cache: 'no-store'});
+      if (!res.ok) continue;
+      var text = await res.text();
+      if (!isValidCSV(text)) continue;
+      var rows = parseCSV(text);
+      if (rows && rows.length > 0) {
+        document.getElementById('error-banner').style.display = 'none';
+        return rows;
+      }
+    } catch(e) { continue; }
   }
+  document.getElementById('error-banner').style.display = 'block';
+  return null;
 }
 
 function renderDashboard(rows) {
-  const total = rows.length;
-  const changed = prevTotal !== null && total !== prevTotal;
+  var total = rows.length;
+  var changed = prevTotal !== null && total !== prevTotal;
   prevTotal = total;
 
-  // --- KPIs ---
+  // Total
   setKPI('kpi-total', total, changed);
   document.getElementById('kpi-total-sub').textContent = 'inscripciones totales';
 
-  // Sedes únicas
-  const sedeKey = Object.keys(rows[0]).find(k => k.toLowerCase().includes('punto') || k.toLowerCase().includes('sede')) || '';
-  const sedesMap = {};
-  rows.forEach(r => {
-    const s = r[sedeKey] || 'Sin especificar';
+  // Sedes (col 5)
+  var sedesMap = {};
+  for (var i = 0; i < rows.length; i++) {
+    var s = (rows[i][5] || '').trim() || 'Sin especificar';
     sedesMap[s] = (sedesMap[s] || 0) + 1;
-  });
-  const sedesCount = Object.keys(sedesMap).length;
+  }
+  var sedesCount = Object.keys(sedesMap).length;
   setKPI('kpi-sedes', sedesCount, false);
   document.getElementById('kpi-sedes-sub').textContent = 'ubicaciones con registros';
 
-  // Último registro
-  const last = rows[rows.length - 1];
-  const tsKey = Object.keys(last)[0];
-  const nombreKey = Object.keys(last).find(k => k.toLowerCase().includes('nombre')) || Object.keys(last)[1];
-  setKPI('kpi-last', shortName(last[nombreKey]), changed);
-  document.getElementById('kpi-last-sub').textContent = formatTime(last[tsKey]);
+  // Ultimo (cols 1, 0)
+  var last = rows[rows.length - 1];
+  setKPI('kpi-last', shortName(last[1]), changed);
+  document.getElementById('kpi-last-sub').textContent = formatTime(last[0]);
 
-  // Aceptaron
-  const aceptoKey = Object.keys(rows[0]).find(k => k.toLowerCase().includes('acepto') || k.toLowerCase().includes('contactado')) || '';
-  const aceptoCount = aceptoKey ? rows.filter(r => (r[aceptoKey]||'').toLowerCase().includes('acepto')).length : total;
-  const pct = Math.round((aceptoCount/total)*100);
+  // Acepto (col 4)
+  var aceptoCount = 0;
+  for (var i = 0; i < rows.length; i++) {
+    var v = (rows[i][4] || '').toLowerCase();
+    if (v.indexOf('acept') !== -1) aceptoCount++;
+  }
+  var pct = total > 0 ? Math.round((aceptoCount / total) * 100) : 0;
   setKPI('kpi-acepto', pct + '%', changed);
-  document.getElementById('kpi-acepto-sub').textContent = `${aceptoCount} de ${total} personas`;
+  document.getElementById('kpi-acepto-sub').textContent = aceptoCount + ' de ' + total + ' personas';
 
-  // --- Barras por sede ---
-  const maxSede = Math.max(...Object.values(sedesMap));
-  const sorted = Object.entries(sedesMap).sort((a,b) => b[1]-a[1]);
-  const barHtml = sorted.map(([sede, cnt]) => `
-    <div class="bar-item">
-      <div class="bar-meta">
-        <span class="bar-name" title="${sede}">${shortSede(sede)}</span>
-        <span class="bar-count">${cnt}</span>
-      </div>
-      <div class="bar-track">
-        <div class="bar-fill" style="width:${Math.round((cnt/maxSede)*100)}%"></div>
-      </div>
-    </div>
-  `).join('');
-  document.getElementById('bar-sedes').innerHTML = barHtml;
+  // Barras por sede
+  var sedeEntries = Object.entries(sedesMap).sort(function(a,b){ return b[1]-a[1]; });
+  var maxS = sedeEntries.length > 0 ? sedeEntries[0][1] : 1;
+  document.getElementById('bar-sedes').innerHTML = sedeEntries.map(function(e) {
+    var pctW = Math.round((e[1]/maxS)*100);
+    return '<div class="bar-item">' +
+      '<div class="bar-meta">' +
+        '<span class="bar-name" title="' + e[0] + '">' + shortSede(e[0]) + '</span>' +
+        '<span class="bar-count">' + e[1] + '</span>' +
+      '</div>' +
+      '<div class="bar-track"><div class="bar-fill" style="width:' + pctW + '%"></div></div>' +
+    '</div>';
+  }).join('');
 
-  // --- Timeline últimos registros ---
-  const recent = [...rows].reverse().slice(0, 8);
-  const tlHtml = recent.map(r => `
-    <div class="tl-item">
-      <div class="tl-dot"></div>
-      <div class="tl-name">${r[nombreKey] || '—'}</div>
-      <div class="tl-sede">${shortSede(r[sedeKey]) || '—'}</div>
-      <div class="tl-time">${formatTime(r[tsKey])}</div>
-    </div>
-  `).join('');
-  document.getElementById('timeline').innerHTML = tlHtml;
+  // Timeline
+  var recent = rows.slice().reverse().slice(0, 8);
+  document.getElementById('timeline').innerHTML = recent.map(function(r) {
+    return '<div class="tl-item">' +
+      '<div class="tl-dot"></div>' +
+      '<div class="tl-name">' + (shortName(r[1])) + '</div>' +
+      '<div class="tl-sede">' + shortSede(r[5]) + '</div>' +
+      '<div class="tl-time">' + formatTime(r[0]) + '</div>' +
+    '</div>';
+  }).join('');
 
-  // --- Chart por hora ---
-  const hourMap = {};
-  rows.forEach(r => {
-    const d = new Date(r[tsKey]);
-    if (!isNaN(d)) {
-      const h = d.getHours();
-      hourMap[h] = (hourMap[h] || 0) + 1;
-    }
+  // Chart por hora
+  var hourMap = {};
+  rows.forEach(function(r) {
+    var d = new Date(r[0]);
+    if (!isNaN(d.getTime())) { var h = d.getHours(); hourMap[h] = (hourMap[h]||0)+1; }
   });
-  const hours = Object.keys(hourMap).map(Number).sort((a,b)=>a-b);
-  const maxH = Math.max(...Object.values(hourMap), 1);
+  var hours = Object.keys(hourMap).map(Number).sort(function(a,b){return a-b;});
+  var maxH = hours.reduce(function(m,h){ return Math.max(m, hourMap[h]); }, 1);
+  var now = new Date();
   document.getElementById('hour-chart-title').textContent =
-    `Ritmo de inscripciones por hora · ${new Date().toLocaleDateString('es-CL', {day:'numeric',month:'long'})}`;
-  document.getElementById('hour-chart').innerHTML = hours.map(h => `
-    <div class="hour-bar-wrap">
-      <div class="hour-bar" style="height:${Math.round((hourMap[h]/maxH)*62)+4}px" title="${hourMap[h]} registros"></div>
-      <div class="hour-label">${h}h</div>
-    </div>
-  `).join('');
+    'Ritmo por hora - ' + now.toLocaleDateString('es-CL', {day:'numeric', month:'long'});
+  document.getElementById('hour-chart').innerHTML = hours.map(function(h) {
+    return '<div class="hour-bar-wrap">' +
+      '<div class="hour-bar" style="height:' + (Math.round((hourMap[h]/maxH)*62)+4) + 'px"></div>' +
+      '<div class="hour-label">' + h + 'h</div>' +
+    '</div>';
+  }).join('');
 
-  // Footer
-  const now = new Date();
+  // Timestamps
   document.getElementById('last-update').textContent =
     'Actualizado ' + now.toLocaleTimeString('es-CL', {hour:'2-digit', minute:'2-digit', second:'2-digit'});
   document.getElementById('footer-info').textContent =
-    `${total} registros · ${sedesCount} puntos · datos al ${now.toLocaleDateString('es-CL')}`;
+    total + ' registros - ' + sedesCount + ' puntos - ' + now.toLocaleDateString('es-CL');
 }
 
 async function refresh() {
-  const rows = await fetchData();
+  var rows = await fetchData();
   if (rows && rows.length > 0) renderDashboard(rows);
 }
 
