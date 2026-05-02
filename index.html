@@ -19,22 +19,15 @@
   }
   * { margin:0; padding:0; box-sizing:border-box; }
   body {
-    background: var(--bg);
-    color: var(--text);
-    font-family: 'Sora', sans-serif;
-    min-height: 100vh;
-    padding: 32px 24px;
+    background: var(--bg); color: var(--text);
+    font-family: 'Sora', sans-serif; min-height: 100vh; padding: 32px 24px;
   }
   body::before {
-    content: '';
-    position: fixed;
-    inset: 0;
+    content: ''; position: fixed; inset: 0;
     background-image:
       linear-gradient(rgba(0,212,170,0.03) 1px, transparent 1px),
       linear-gradient(90deg, rgba(0,212,170,0.03) 1px, transparent 1px);
-    background-size: 40px 40px;
-    pointer-events: none;
-    z-index: 0;
+    background-size: 40px 40px; pointer-events: none; z-index: 0;
   }
   .container { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
   header {
@@ -61,26 +54,19 @@
     border-radius: 20px; padding: 6px 14px;
     font-family: 'DM Mono', monospace; font-size: 12px; color: var(--muted);
   }
-  .live-dot {
-    width: 7px; height: 7px; border-radius: 50%;
-    background: var(--accent); animation: pulse 1.5s ease-in-out infinite;
-  }
+  .live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); animation: pulse 1.5s ease-in-out infinite; }
   #last-update { font-size: 11px; color: var(--muted); font-family: 'DM Mono', monospace; }
   #error-banner {
-    display: none;
-    background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3);
-    border-radius: 10px; padding: 12px 18px; margin-bottom: 20px;
-    font-size: 13px; color: #fca5a5;
+    display: none; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3);
+    border-radius: 10px; padding: 12px 18px; margin-bottom: 20px; font-size: 13px; color: #fca5a5;
   }
   .kpi-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
     gap: 16px; margin-bottom: 28px;
   }
   .kpi-card {
     background: var(--surface); border: 1px solid var(--border);
-    border-radius: 16px; padding: 24px 22px;
-    position: relative; overflow: hidden;
+    border-radius: 16px; padding: 24px 22px; position: relative; overflow: hidden;
   }
   .kpi-card::before {
     content: ''; position: absolute; top: 0; left: 0; right: 0;
@@ -90,10 +76,7 @@
   .kpi-card.blue::before  { background: linear-gradient(90deg, var(--accent2), transparent); }
   .kpi-card.amber::before { background: linear-gradient(90deg, var(--accent3), transparent); }
   .kpi-card.green::before { background: linear-gradient(90deg, #22c55e, transparent); }
-  .kpi-label {
-    font-size: 11px; font-weight: 600; letter-spacing: 1.2px;
-    text-transform: uppercase; color: var(--muted); margin-bottom: 10px;
-  }
+  .kpi-label { font-size: 11px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
   .kpi-value {
     font-size: 48px; font-weight: 700; letter-spacing: -2px; line-height: 1;
     font-family: 'DM Mono', monospace; transition: all 0.4s ease;
@@ -105,41 +88,29 @@
   .kpi-sub { font-size: 12px; color: var(--muted); margin-top: 6px; font-weight: 300; }
   @keyframes flash { 0% { transform: scale(1.08); } 100% { transform: scale(1); } }
   .kpi-flash { animation: flash 0.6s ease; }
+
   .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
   @media (max-width: 700px) { .grid-2 { grid-template-columns: 1fr; } }
-  .card {
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: 16px; padding: 24px;
-  }
-  .card-title {
-    font-size: 11px; font-weight: 600; letter-spacing: 1.2px;
-    text-transform: uppercase; color: var(--muted); margin-bottom: 20px;
-  }
-  .bar-list { display: flex; flex-direction: column; gap: 14px; }
-  .bar-item { display: flex; flex-direction: column; gap: 6px; }
-  .bar-meta { display: flex; justify-content: space-between; align-items: baseline; }
-  .bar-name {
-    font-size: 13px; color: var(--text);
-    white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 75%;
-  }
-  .bar-count { font-family: 'DM Mono', monospace; font-size: 13px; color: var(--accent); font-weight: 500; }
-  .bar-track { height: 6px; background: var(--surface2); border-radius: 3px; overflow: hidden; }
-  .bar-fill {
-    height: 100%; border-radius: 3px;
-    background: linear-gradient(90deg, var(--accent), var(--accent2));
-    transition: width 0.7s cubic-bezier(0.4,0,0.2,1); width: 0%;
-  }
-  .timeline-list {
-    display: flex; flex-direction: column; gap: 10px;
-    max-height: 280px; overflow-y: auto;
-  }
+  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px; }
+  .card-title { font-size: 11px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; }
+
+  /* Donut chart */
+  .donut-wrap { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
+  .donut-svg { flex-shrink: 0; }
+  .donut-legend { display: flex; flex-direction: column; gap: 10px; flex: 1; min-width: 120px; }
+  .legend-item { display: flex; align-items: center; gap: 10px; }
+  .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
+  .legend-label { font-size: 12px; color: var(--text); flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .legend-val { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--muted); }
+
+  /* Timeline */
+  .timeline-list { display: flex; flex-direction: column; gap: 10px; max-height: 280px; overflow-y: auto; }
   .timeline-list::-webkit-scrollbar { width: 4px; }
   .timeline-list::-webkit-scrollbar-track { background: var(--surface2); }
   .timeline-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
   .tl-item {
-    display: flex; align-items: center; gap: 12px;
-    padding: 10px 12px; background: var(--surface2);
-    border-radius: 10px; font-size: 13px;
+    display: flex; align-items: center; gap: 12px; padding: 10px 12px;
+    background: var(--surface2); border-radius: 10px; font-size: 13px;
     animation: fadeIn 0.4s ease;
   }
   @keyframes fadeIn { from { opacity:0; transform: translateY(-6px); } to { opacity:1; transform: translateY(0); } }
@@ -147,21 +118,17 @@
   .tl-name { font-weight: 600; flex: 1; }
   .tl-sede { font-size: 11px; color: var(--muted); flex: 1.5; }
   .tl-time { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); flex-shrink:0; }
+
+  /* Hour chart */
   .hour-chart { display: flex; align-items: flex-end; gap: 4px; height: 70px; padding-top: 8px; }
   .hour-bar-wrap { display: flex; flex-direction: column; align-items: center; flex: 1; gap: 4px; }
-  .hour-bar {
-    width: 100%; border-radius: 3px 3px 0 0; background: var(--accent2);
-    opacity: 0.7; transition: height 0.7s cubic-bezier(0.4,0,0.2,1); min-height: 2px;
-  }
+  .hour-bar { width: 100%; border-radius: 3px 3px 0 0; background: var(--accent2); opacity: 0.7; min-height: 2px; transition: height 0.7s cubic-bezier(0.4,0,0.2,1); }
   .hour-label { font-size: 9px; color: var(--muted); font-family: 'DM Mono', monospace; }
-  footer {
-    margin-top: 28px; text-align: center;
-    font-size: 11px; color: var(--muted); font-family: 'DM Mono', monospace;
-  }
+
+  footer { margin-top: 28px; text-align: center; font-size: 11px; color: var(--muted); font-family: 'DM Mono', monospace; }
   .skeleton {
     background: linear-gradient(90deg, var(--surface2) 25%, var(--surface) 50%, var(--surface2) 75%);
-    background-size: 200% 100%; animation: shimmer 1.5s infinite;
-    border-radius: 4px; height: 48px; width: 60%;
+    background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 4px; height: 48px; width: 60%;
   }
   @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
 </style>
@@ -177,10 +144,7 @@
       </div>
     </div>
     <div class="status-bar">
-      <div class="refresh-badge">
-        <div class="live-dot"></div>
-        <span>Auto-refresh 30s</span>
-      </div>
+      <div class="refresh-badge"><div class="live-dot"></div><span>Auto-refresh 30s</span></div>
       <div id="last-update">Cargando...</div>
     </div>
   </header>
@@ -213,7 +177,10 @@
   <div class="grid-2">
     <div class="card">
       <div class="card-title">Registros por punto</div>
-      <div class="bar-list" id="bar-sedes"></div>
+      <div class="donut-wrap">
+        <svg class="donut-svg" id="donut-svg" width="140" height="140" viewBox="0 0 140 140"></svg>
+        <div class="donut-legend" id="donut-legend"></div>
+      </div>
     </div>
     <div class="card">
       <div class="card-title">Ultimos registros</div>
@@ -230,8 +197,7 @@
 </div>
 
 <script>
-// Columnas por indice (0-based):
-// 0=Marca temporal, 1=Nombre, 2=Correo, 3=Celular, 4=Acepto contacto, 5=Punto Davila
+// Columnas (0-based): 0=Timestamp, 1=Nombre, 2=Correo, 3=Celular, 4=Acepto/No acepto, 5=Punto Davila
 var CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQWCapo26aj0cGqq_l1NLdkvhDwm-EmsQW9KD_jrTso_V9-akG2JQi09Eq-1yrgq0dWlNEPETx11LJz/pub?gid=2028590628&single=true&output=csv";
 var REFRESH_MS = 30000;
 var prevTotal = null;
@@ -241,6 +207,9 @@ var PROXIES = [
   function(u) { return "https://api.allorigins.win/raw?url=" + encodeURIComponent(u); },
   function(u) { return "https://api.codetabs.com/v1/proxy?quest=" + encodeURIComponent(u); }
 ];
+
+// Paleta de colores para el donut
+var COLORS = ["#00d4aa","#3b82f6","#f59e0b","#a78bfa","#f43f5e","#22c55e","#fb923c","#38bdf8"];
 
 function splitLine(line) {
   var cols = [], cur = "", inQ = false;
@@ -269,8 +238,7 @@ function parseCSV(text) {
 
 function isValidCSV(text) {
   if (!text || text.length < 20) return false;
-  var first = text.split('\n')[0];
-  return first.split(',').length >= 3;
+  return text.split('\n')[0].split(',').length >= 3;
 }
 
 function setKPI(id, val, animate) {
@@ -279,29 +247,31 @@ function setKPI(id, val, animate) {
   if (animate) { el.classList.remove('kpi-flash'); void el.offsetWidth; el.classList.add('kpi-flash'); }
 }
 
-function shortName(s) {
-  if (!s) return "-";
-  return s.trim().split(' ')[0];
-}
+function shortName(s) { return s ? s.trim().split(' ')[0] : '-'; }
 
 function formatTime(s) {
   if (!s) return '';
   var d = new Date(s);
-  if (isNaN(d.getTime())) return s;
-  return d.toLocaleTimeString('es-CL', {hour:'2-digit', minute:'2-digit'});
+  return isNaN(d.getTime()) ? s : d.toLocaleTimeString('es-CL', {hour:'2-digit', minute:'2-digit'});
 }
 
 function shortSede(s) {
-  if (!s || !s.trim()) return "-";
+  if (!s || !s.trim()) return '-';
   var m = s.match(/^([^(]+)/);
   return m ? m[1].trim() : s.trim();
+}
+
+// Verifica si el valor es exactamente "acepto" (no "no acepto")
+function esAcepto(val) {
+  var v = (val || '').trim().toLowerCase();
+  // Excluye "no acepto", cuenta solo "acepto" exacto o variantes sin "no"
+  return v === 'acepto' || (v.indexOf('acept') !== -1 && v.indexOf('no ') !== 0 && v !== 'no acepto');
 }
 
 async function fetchData() {
   for (var p = 0; p < PROXIES.length; p++) {
     try {
-      var proxyUrl = PROXIES[p](CSV_URL);
-      var res = await fetch(proxyUrl, {cache: 'no-store'});
+      var res = await fetch(PROXIES[p](CSV_URL), {cache: 'no-store'});
       if (!res.ok) continue;
       var text = await res.text();
       if (!isValidCSV(text)) continue;
@@ -316,16 +286,80 @@ async function fetchData() {
   return null;
 }
 
+// Dibuja donut SVG puro
+function drawDonut(entries, total) {
+  var cx = 70, cy = 70, r = 52, innerR = 34;
+  var circumference = 2 * Math.PI * r;
+  var gap = 2; // grados de separacion entre segmentos
+  var svgParts = [];
+  var legendParts = [];
+
+  // Fondo del donut
+  svgParts.push('<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="none" stroke="#1a2235" stroke-width="' + (r - innerR) + '"/>');
+
+  // Total en el centro
+  svgParts.push('<text x="' + cx + '" y="' + (cy - 6) + '" text-anchor="middle" fill="#f1f5f9" font-size="22" font-weight="700" font-family="DM Mono,monospace">' + total + '</text>');
+  svgParts.push('<text x="' + cx + '" y="' + (cy + 12) + '" text-anchor="middle" fill="#64748b" font-size="9" font-family="Sora,sans-serif">TOTAL</text>');
+
+  var startAngle = -90; // empieza desde arriba
+  for (var i = 0; i < entries.length; i++) {
+    var pct = entries[i][1] / total;
+    var sweepDeg = pct * 360 - gap;
+    if (sweepDeg < 1) sweepDeg = 1;
+    var color = COLORS[i % COLORS.length];
+
+    var startRad = (startAngle) * Math.PI / 180;
+    var endRad   = (startAngle + sweepDeg) * Math.PI / 180;
+
+    var x1 = cx + r * Math.cos(startRad);
+    var y1 = cy + r * Math.sin(startRad);
+    var x2 = cx + r * Math.cos(endRad);
+    var y2 = cy + r * Math.sin(endRad);
+
+    var largeArc = sweepDeg > 180 ? 1 : 0;
+
+    var xi1 = cx + innerR * Math.cos(endRad);
+    var yi1 = cy + innerR * Math.sin(endRad);
+    var xi2 = cx + innerR * Math.cos(startRad);
+    var yi2 = cy + innerR * Math.sin(startRad);
+
+    var d = [
+      'M', x1, y1,
+      'A', r, r, 0, largeArc, 1, x2, y2,
+      'L', xi1, yi1,
+      'A', innerR, innerR, 0, largeArc, 0, xi2, yi2,
+      'Z'
+    ].join(' ');
+
+    svgParts.push('<path d="' + d + '" fill="' + color + '" opacity="0.9"/>');
+
+    startAngle += sweepDeg + gap;
+
+    // Leyenda
+    var pctStr = Math.round(pct * 100) + '%';
+    legendParts.push(
+      '<div class="legend-item">' +
+        '<div class="legend-dot" style="background:' + color + '"></div>' +
+        '<span class="legend-label" title="' + entries[i][0] + '">' + shortSede(entries[i][0]) + '</span>' +
+        '<span class="legend-val">' + entries[i][1] + ' <span style="color:#475569">(' + pctStr + ')</span></span>' +
+      '</div>'
+    );
+  }
+
+  document.getElementById('donut-svg').innerHTML = svgParts.join('');
+  document.getElementById('donut-legend').innerHTML = legendParts.join('');
+}
+
 function renderDashboard(rows) {
   var total = rows.length;
   var changed = prevTotal !== null && total !== prevTotal;
   prevTotal = total;
 
-  // Total
+  // KPI: Total
   setKPI('kpi-total', total, changed);
   document.getElementById('kpi-total-sub').textContent = 'inscripciones totales';
 
-  // Sedes (col 5)
+  // KPI: Sedes (col 5)
   var sedesMap = {};
   for (var i = 0; i < rows.length; i++) {
     var s = (rows[i][5] || '').trim() || 'Sin especificar';
@@ -335,41 +369,30 @@ function renderDashboard(rows) {
   setKPI('kpi-sedes', sedesCount, false);
   document.getElementById('kpi-sedes-sub').textContent = 'ubicaciones con registros';
 
-  // Ultimo (cols 1, 0)
+  // KPI: Ultimo registro (col 1 nombre, col 0 timestamp)
   var last = rows[rows.length - 1];
   setKPI('kpi-last', shortName(last[1]), changed);
   document.getElementById('kpi-last-sub').textContent = formatTime(last[0]);
 
-  // Acepto (col 4)
+  // KPI: Aceptaron contacto (col 4) — excluye "No acepto"
   var aceptoCount = 0;
   for (var i = 0; i < rows.length; i++) {
-    var v = (rows[i][4] || '').toLowerCase();
-    if (v.indexOf('acept') !== -1) aceptoCount++;
+    if (esAcepto(rows[i][4])) aceptoCount++;
   }
   var pct = total > 0 ? Math.round((aceptoCount / total) * 100) : 0;
   setKPI('kpi-acepto', pct + '%', changed);
   document.getElementById('kpi-acepto-sub').textContent = aceptoCount + ' de ' + total + ' personas';
 
-  // Barras por sede
+  // Donut por sede
   var sedeEntries = Object.entries(sedesMap).sort(function(a,b){ return b[1]-a[1]; });
-  var maxS = sedeEntries.length > 0 ? sedeEntries[0][1] : 1;
-  document.getElementById('bar-sedes').innerHTML = sedeEntries.map(function(e) {
-    var pctW = Math.round((e[1]/maxS)*100);
-    return '<div class="bar-item">' +
-      '<div class="bar-meta">' +
-        '<span class="bar-name" title="' + e[0] + '">' + shortSede(e[0]) + '</span>' +
-        '<span class="bar-count">' + e[1] + '</span>' +
-      '</div>' +
-      '<div class="bar-track"><div class="bar-fill" style="width:' + pctW + '%"></div></div>' +
-    '</div>';
-  }).join('');
+  drawDonut(sedeEntries, total);
 
-  // Timeline
+  // Timeline (ultimos 8)
   var recent = rows.slice().reverse().slice(0, 8);
   document.getElementById('timeline').innerHTML = recent.map(function(r) {
     return '<div class="tl-item">' +
       '<div class="tl-dot"></div>' +
-      '<div class="tl-name">' + (shortName(r[1])) + '</div>' +
+      '<div class="tl-name">' + shortName(r[1]) + '</div>' +
       '<div class="tl-sede">' + shortSede(r[5]) + '</div>' +
       '<div class="tl-time">' + formatTime(r[0]) + '</div>' +
     '</div>';
