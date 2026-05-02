@@ -4,99 +4,109 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Davila en CicloRecreoVia</title>
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet">
+<!-- Nunito: tipografía moderna sin ceros con línea vertical -->
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #0a0e1a; --surface: #111827; --surface2: #1a2235;
     --border: rgba(255,255,255,0.07); --accent: #00d4aa;
-    --accent2: #3b82f6; --accent3: #f59e0b; --text: #f1f5f9; --muted: #64748b;
+    --accent2: #f97316; --accent3: #f59e0b; --text: #f1f5f9; --muted: #ffffff;
   }
   * { margin:0; padding:0; box-sizing:border-box; }
-  body { background:var(--bg); color:var(--text); font-family:'Sora',sans-serif; min-height:100vh; padding:32px 24px; }
+  body {
+    background:var(--bg); color:var(--text);
+    font-family:'Nunito',sans-serif;
+    min-height:100vh; padding:28px 20px;
+    text-align:center;
+  }
   body::before {
     content:''; position:fixed; inset:0;
     background-image: linear-gradient(rgba(0,212,170,0.03) 1px,transparent 1px), linear-gradient(90deg,rgba(0,212,170,0.03) 1px,transparent 1px);
     background-size:40px 40px; pointer-events:none; z-index:0;
   }
-  .container { max-width:1100px; margin:0 auto; position:relative; z-index:1; }
+  .container { max-width:680px; margin:0 auto; position:relative; z-index:1; }
 
   /* HEADER */
-  header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:36px; flex-wrap:wrap; gap:16px; }
-  .brand { display:flex; align-items:center; gap:14px; }
+  header { margin-bottom:28px; }
+  .logo-dot-wrap { display:flex; justify-content:center; margin-bottom:10px; }
   .logo-dot { width:10px; height:10px; border-radius:50%; background:var(--accent); box-shadow:0 0 12px var(--accent); animation:pulse 2s ease-in-out infinite; }
-  @keyframes pulse { 0%,100%{box-shadow:0 0 8px var(--accent);opacity:1} 50%{box-shadow:0 0 20px var(--accent);opacity:0.7} }
-  h1 { font-size:22px; font-weight:700; letter-spacing:-0.5px; }
+  @keyframes pulse { 0%,100%{box-shadow:0 0 8px var(--accent);opacity:1} 50%{box-shadow:0 0 22px var(--accent);opacity:0.7} }
+  h1 { font-size:24px; font-weight:800; letter-spacing:-0.5px; }
   h1 span { color:var(--accent); }
-  .subtitle { font-size:13px; color:var(--muted); margin-top:3px; font-weight:300; }
-  .status-bar { display:flex; flex-direction:column; align-items:flex-end; gap:6px; }
-  .refresh-badge { display:flex; align-items:center; gap:7px; background:var(--surface2); border:1px solid var(--border); border-radius:20px; padding:6px 14px; font-family:'DM Mono',monospace; font-size:12px; color:var(--muted); }
+  .subtitle { font-size:13px; color:rgba(255,255,255,0.55); margin-top:4px; font-weight:400; }
+  .refresh-badge { display:inline-flex; align-items:center; gap:7px; background:var(--surface2); border:1px solid var(--border); border-radius:20px; padding:5px 14px; font-size:12px; color:rgba(255,255,255,0.55); margin-top:10px; }
   .live-dot { width:7px; height:7px; border-radius:50%; background:var(--accent); animation:pulse 1.5s ease-in-out infinite; }
-  #last-update { font-size:11px; color:var(--muted); font-family:'DM Mono',monospace; }
+  #last-update { font-size:11px; color:rgba(255,255,255,0.4); margin-top:6px; }
+
+  /* FECHA ACTUAL */
+  #fecha-actual {
+    font-size:17px; font-weight:700; color:#ffffff;
+    margin-bottom:14px; letter-spacing:0.3px;
+    text-transform:capitalize;
+  }
 
   /* ERROR */
   #error-banner { display:none; background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.3); border-radius:10px; padding:12px 18px; margin-bottom:20px; font-size:13px; color:#fca5a5; }
 
   /* CARDS */
-  .card { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:24px; margin-bottom:20px; }
+  .card { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:24px 20px; margin-bottom:18px; }
+  .card-title { font-size:16px; font-weight:800; letter-spacing:0.4px; text-transform:uppercase; color:#ffffff; margin-bottom:18px; }
 
-  /* Card title — 50% más grande que antes (era 11px → ahora 16px), color blanco */
-  .card-title { font-size:16px; font-weight:700; letter-spacing:0.5px; text-transform:uppercase; color:#ffffff; margin-bottom:20px; }
-
-  /* KPI ÚNICO (Total registros) */
-  .kpi-single {
-    background:var(--surface); border:1px solid var(--border); border-radius:16px;
-    padding:28px 28px; margin-bottom:20px; position:relative; overflow:hidden;
-  }
+  /* KPI TOTAL */
+  .kpi-single { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:28px 20px; margin-bottom:18px; position:relative; overflow:hidden; }
   .kpi-single::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; border-radius:16px 16px 0 0; background:linear-gradient(90deg,var(--accent),var(--accent2)); }
-  .kpi-single .kpi-label { font-size:16px; font-weight:700; letter-spacing:0.5px; text-transform:uppercase; color:#ffffff; margin-bottom:12px; }
-  .kpi-single .kpi-value { font-size:72px; font-weight:700; letter-spacing:-3px; line-height:1; font-family:'DM Mono',monospace; color:var(--accent); }
-  .kpi-single .kpi-sub { font-size:13px; color:var(--muted); margin-top:8px; font-weight:300; }
+  .kpi-single .kpi-label { font-size:16px; font-weight:800; text-transform:uppercase; color:#ffffff; margin-bottom:12px; letter-spacing:0.4px; }
+  .kpi-single .kpi-value { font-size:80px; font-weight:800; line-height:1; color:var(--accent); }
+  .kpi-single .kpi-sub { font-size:14px; color:#ffffff; margin-top:8px; font-weight:600; }
 
-  /* KPI DOBLE (Acepto + Ultimo) */
-  .kpi-pair { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:20px; }
-  @media(max-width:500px){ .kpi-pair{grid-template-columns:1fr;} }
-  .kpi-card { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:24px 22px; position:relative; overflow:hidden; }
+  /* KPI PAIR */
+  .kpi-pair { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:18px; }
+  @media(max-width:480px){ .kpi-pair{grid-template-columns:1fr;} }
+  .kpi-card { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:22px 18px; position:relative; overflow:hidden; }
   .kpi-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; border-radius:16px 16px 0 0; }
   .kpi-card.green::before { background:linear-gradient(90deg,#22c55e,transparent); }
   .kpi-card.amber::before { background:linear-gradient(90deg,var(--accent3),transparent); }
-  .kpi-label { font-size:16px; font-weight:700; letter-spacing:0.5px; text-transform:uppercase; color:#ffffff; margin-bottom:10px; }
-  .kpi-value { font-size:48px; font-weight:700; letter-spacing:-2px; line-height:1; font-family:'DM Mono',monospace; }
+  .kpi-label { font-size:15px; font-weight:800; text-transform:uppercase; color:#ffffff; margin-bottom:10px; letter-spacing:0.3px; }
+  .kpi-value { font-size:52px; font-weight:800; line-height:1; }
   .kpi-card.green .kpi-value { color:#22c55e; }
-  .kpi-card.amber .kpi-value { color:var(--accent3); font-size:22px; padding-top:6px; }
-  .kpi-sub { font-size:12px; color:var(--muted); margin-top:6px; font-weight:300; }
+  .kpi-card.amber .kpi-value { color:var(--accent3); font-size:24px; padding-top:6px; }
+  .kpi-sub { font-size:13px; color:#ffffff; margin-top:6px; font-weight:600; }
   @keyframes flash { 0%{transform:scale(1.08)} 100%{transform:scale(1)} }
   .kpi-flash { animation:flash 0.6s ease; }
 
-  /* DONUT — ancho completo, leyenda abajo */
-  .donut-container { display:flex; flex-direction:column; align-items:center; gap:32px; }
+  /* DONUT */
+  .donut-container { display:flex; flex-direction:column; align-items:center; gap:28px; }
   .donut-svg-wrap { width:100%; display:flex; justify-content:center; }
-  .donut-legend { display:flex; flex-direction:row; flex-wrap:wrap; gap:16px 24px; justify-content:center; width:100%; }
-  .legend-item { display:flex; align-items:center; gap:10px; }
-  .legend-dot { width:16px; height:16px; border-radius:50%; flex-shrink:0; }
-  /* Leyenda letra el triple de grande: era ~12px → 36px */
-  .legend-label { font-size:20px; color:var(--text); white-space:nowrap; }
-  .legend-val { font-family:'DM Mono',monospace; font-size:20px; color:var(--muted); }
+  .donut-legend { display:flex; flex-direction:column; gap:14px; align-items:flex-start; width:100%; padding:0 8px; }
+  .legend-item { display:flex; align-items:center; gap:12px; }
+  .legend-dot { width:18px; height:18px; border-radius:50%; flex-shrink:0; }
+  .legend-label { font-size:20px; font-weight:700; color:#ffffff; }
+  .legend-val { font-size:20px; font-weight:600; color:#ffffff; margin-left:4px; }
+  .legend-pct { font-size:18px; color:rgba(255,255,255,0.55); margin-left:4px; }
 
   /* TIMELINE */
-  .timeline-list { display:flex; flex-direction:column; gap:10px; max-height:320px; overflow-y:auto; }
+  .timeline-list { display:flex; flex-direction:column; gap:8px; max-height:520px; overflow-y:auto; }
   .timeline-list::-webkit-scrollbar{width:4px}
   .timeline-list::-webkit-scrollbar-track{background:var(--surface2)}
-  .timeline-list::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
-  .tl-item { display:flex; align-items:center; gap:12px; padding:10px 12px; background:var(--surface2); border-radius:10px; font-size:13px; animation:fadeIn 0.4s ease; }
-  @keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+  .timeline-list::-webkit-scrollbar-thumb{background:rgba(255,255,255,0.15);border-radius:2px}
+  .tl-item { display:flex; align-items:center; gap:10px; padding:10px 12px; background:var(--surface2); border-radius:10px; font-size:13px; animation:fadeIn 0.4s ease; text-align:left; }
+  @keyframes fadeIn{from{opacity:0;transform:translateY(-5px)}to{opacity:1;transform:translateY(0)}}
   .tl-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex-shrink:0}
-  .tl-name{font-weight:600;flex:1}
-  .tl-sede{font-size:11px;color:var(--muted);flex:1.5}
-  .tl-time{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);flex-shrink:0}
+  .tl-name{font-weight:700;flex:1;color:#ffffff}
+  .tl-sede{font-size:11px;color:rgba(255,255,255,0.7);flex:1.5}
+  .tl-time{font-size:11px;color:rgba(255,255,255,0.6);flex-shrink:0}
 
-  /* HOUR CHART */
-  .hour-chart{display:flex;align-items:flex-end;gap:4px;height:70px;padding-top:8px}
-  .hour-bar-wrap{display:flex;flex-direction:column;align-items:center;flex:1;gap:4px}
-  .hour-bar{width:100%;border-radius:3px 3px 0 0;background:var(--accent2);opacity:0.7;min-height:2px;transition:height 0.7s cubic-bezier(0.4,0,0.2,1)}
-  .hour-label{font-size:9px;color:var(--muted);font-family:'DM Mono',monospace}
+  /* BADGE conteo */
+  .count-badge {
+    display:inline-block; background:var(--accent); color:#0a0e1a;
+    font-size:28px; font-weight:800; border-radius:12px;
+    padding:8px 24px; margin-bottom:16px;
+  }
+  .no-data { color:rgba(255,255,255,0.45); font-size:14px; padding:12px 0; }
 
-  footer{margin-top:28px;text-align:center;font-size:11px;color:var(--muted);font-family:'DM Mono',monospace}
-  .skeleton{background:linear-gradient(90deg,var(--surface2) 25%,var(--surface) 50%,var(--surface2) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:4px;height:60px;width:40%}
+  footer{margin-top:24px;font-size:11px;color:rgba(255,255,255,0.35);}
+
+  .skeleton{display:inline-block;background:linear-gradient(90deg,var(--surface2) 25%,var(--surface) 50%,var(--surface2) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:8px;height:64px;width:120px;}
   @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 </style>
 </head>
@@ -105,20 +115,17 @@
 
   <!-- HEADER -->
   <header>
-    <div class="brand">
-      <div class="logo-dot"></div>
-      <div>
-        <h1>Dávila en <span>CicloRecreoVía</span></h1>
-        <div class="subtitle">Dashboard de registros en tiempo real</div>
-      </div>
-    </div>
-    <div class="status-bar">
-      <div class="refresh-badge"><div class="live-dot"></div><span>Auto-refresh 30s</span></div>
-      <div id="last-update">Cargando...</div>
-    </div>
+    <div class="logo-dot-wrap"><div class="logo-dot"></div></div>
+    <h1>Dávila en <span>CicloRecreoVía</span></h1>
+    <div class="subtitle">Dashboard de registros en tiempo real</div>
+    <div class="refresh-badge"><div class="live-dot"></div><span>Auto-refresh 30s</span></div>
+    <div id="last-update">Cargando...</div>
   </header>
 
   <div id="error-banner">No se pudo cargar la fuente de datos. Reintentando...</div>
+
+  <!-- FECHA ACTUAL -->
+  <div id="fecha-actual"></div>
 
   <!-- 1. TOTAL REGISTROS -->
   <div class="kpi-single">
@@ -127,41 +134,49 @@
     <div class="kpi-sub" id="kpi-total-sub">&nbsp;</div>
   </div>
 
-  <!-- 2. REGISTROS POR PUNTO (donut) -->
+  <!-- 2. REGISTROS POR PUNTO -->
   <div class="card">
     <div class="card-title">Registros por punto</div>
     <div class="donut-container">
       <div class="donut-svg-wrap">
-        <svg id="donut-svg" viewBox="0 0 300 300" style="width:100%;max-width:340px;height:auto"></svg>
+        <svg id="donut-svg" viewBox="0 0 300 300" style="width:100%;max-width:360px;height:auto"></svg>
       </div>
       <div class="donut-legend" id="donut-legend"></div>
     </div>
   </div>
 
-  <!-- 3 + 4. ACEPTARON CONTACTO + ULTIMO REGISTRO -->
+  <!-- 3+4. ACEPTARON + ULTIMO -->
   <div class="kpi-pair">
     <div class="kpi-card green">
       <div class="kpi-label">Aceptaron contacto</div>
-      <div class="kpi-value" id="kpi-acepto"><div class="skeleton"></div></div>
+      <div class="kpi-value" id="kpi-acepto"><div class="skeleton" style="height:48px;width:80px"></div></div>
       <div class="kpi-sub" id="kpi-acepto-sub">&nbsp;</div>
     </div>
     <div class="kpi-card amber">
       <div class="kpi-label">Ultimo registro</div>
-      <div class="kpi-value" id="kpi-last"><div class="skeleton"></div></div>
+      <div class="kpi-value" id="kpi-last"><div class="skeleton" style="height:48px;width:80px"></div></div>
       <div class="kpi-sub" id="kpi-last-sub">&nbsp;</div>
     </div>
   </div>
 
-  <!-- 5. ULTIMOS REGISTROS -->
+  <!-- 5. ULTIMOS 20 REGISTROS -->
   <div class="card">
     <div class="card-title">Ultimos registros</div>
     <div class="timeline-list" id="timeline"></div>
   </div>
 
-  <!-- 6. RITMO POR HORA -->
-  <div class="card" style="margin-bottom:20px">
-    <div class="card-title" id="hour-chart-title">Ritmo de inscripciones por hora</div>
-    <div class="hour-chart" id="hour-chart"></div>
+  <!-- 6. ULTIMOS 30 MINUTOS -->
+  <div class="card">
+    <div class="card-title">Registros ultimos 30 minutos</div>
+    <div class="count-badge" id="count-30">—</div>
+    <div class="timeline-list" id="timeline-30"></div>
+  </div>
+
+  <!-- 7. ULTIMOS 60 MINUTOS -->
+  <div class="card">
+    <div class="card-title">Registros ultimos 60 minutos</div>
+    <div class="count-badge" id="count-60">—</div>
+    <div class="timeline-list" id="timeline-60"></div>
   </div>
 
   <footer id="footer-info">Cargando...</footer>
@@ -171,9 +186,16 @@
 var CSV_URL = "https://docs.google.com/spreadsheets/d/1qPi-cWSQcdvUX5ZS-kXFoyGeXhgX9iTxfPcpUz_vI2M/gviz/tq?tqx=out:csv&gid=2028590628";
 var REFRESH_MS = 30000;
 var prevTotal = null;
+// Verde→amarillo, azul→naranja
+var COLORS = ["#00d4aa","#f97316","#eab308","#a78bfa","#f43f5e","#e879f9","#fb923c","#38bdf8"];
 
-// Paleta: verde→amarillo, azul→naranja, resto igual
-var COLORS = ["#00d4aa","#f97316","#f59e0b","#a78bfa","#f43f5e","#eab308","#fb923c","#38bdf8"];
+// Fecha actual en español
+function fechaHoy() {
+  var d = new Date();
+  var dias = ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
+  var meses = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+  return dias[d.getDay()] + ' ' + d.getDate() + ' de ' + meses[d.getMonth()] + ' ' + d.getFullYear();
+}
 
 function splitLine(line) {
   var cols=[], cur="", inQ=false;
@@ -223,6 +245,18 @@ function esAcepto(val){
   return (val||'').trim().toLowerCase()==='acepto';
 }
 
+function buildTimeline(rows) {
+  if(!rows||rows.length===0) return '<div class="no-data">Sin registros</div>';
+  return rows.map(function(r){
+    return '<div class="tl-item">'+
+      '<div class="tl-dot"></div>'+
+      '<div class="tl-name">'+shortName(r[1])+'</div>'+
+      '<div class="tl-sede">'+shortSede(r[5])+'</div>'+
+      '<div class="tl-time">'+formatTime(r[0])+'</div>'+
+    '</div>';
+  }).join('');
+}
+
 async function fetchData(){
   try{
     var res=await fetch(CSV_URL+'&nocache='+Date.now());
@@ -237,7 +271,7 @@ async function fetchData(){
     throw new Error('Sin filas');
   }catch(e){
     document.getElementById('error-banner').style.display='block';
-    document.getElementById('error-banner').textContent='Error al cargar datos: '+e.message+'. Reintentando...';
+    document.getElementById('error-banner').textContent='Error: '+e.message+'. Reintentando...';
     return null;
   }
 }
@@ -245,12 +279,9 @@ async function fetchData(){
 function drawDonut(entries,total){
   var cx=150,cy=150,r=120,innerR=72,gap=1.5;
   var svg=[];
-  // Fondo
   svg.push('<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="none" stroke="#1a2235" stroke-width="'+(r-innerR)+'"/>');
-  // Total en centro
-  svg.push('<text x="'+cx+'" y="'+(cy-10)+'" text-anchor="middle" fill="#f1f5f9" font-size="52" font-weight="700" font-family="DM Mono,monospace">'+total+'</text>');
-  svg.push('<text x="'+cx+'" y="'+(cy+22)+'" text-anchor="middle" fill="#64748b" font-size="18" font-family="Sora,sans-serif">TOTAL</text>');
-
+  svg.push('<text x="'+cx+'" y="'+(cy-8)+'" text-anchor="middle" fill="#f1f5f9" font-size="56" font-weight="800" font-family="Nunito,sans-serif">'+total+'</text>');
+  svg.push('<text x="'+cx+'" y="'+(cy+24)+'" text-anchor="middle" fill="rgba(255,255,255,0.6)" font-size="18" font-family="Nunito,sans-serif">TOTAL</text>');
   var legend=[], angle=-90;
   for(var i=0;i<entries.length;i++){
     var pct=entries[i][1]/total;
@@ -270,7 +301,8 @@ function drawDonut(entries,total){
       '<div class="legend-item">'+
         '<div class="legend-dot" style="background:'+color+'"></div>'+
         '<span class="legend-label">'+shortSede(entries[i][0])+'</span>'+
-        '<span class="legend-val">&nbsp;'+entries[i][1]+'&nbsp;<span style="color:#475569">('+Math.round(pct*100)+'%)</span></span>'+
+        '<span class="legend-val">'+entries[i][1]+'</span>'+
+        '<span class="legend-pct">('+Math.round(pct*100)+'%)</span>'+
       '</div>'
     );
   }
@@ -283,11 +315,14 @@ function renderDashboard(rows){
   var changed=prevTotal!==null&&total!==prevTotal;
   prevTotal=total;
 
+  // Fecha
+  document.getElementById('fecha-actual').textContent=fechaHoy();
+
   // 1. Total
   setKPI('kpi-total',total,changed);
   document.getElementById('kpi-total-sub').textContent='inscripciones totales';
 
-  // Sedes (col 5)
+  // Sedes
   var sedesMap={};
   for(var i=0;i<rows.length;i++){
     var s=(rows[i][5]||'').trim()||'Sin especificar';
@@ -299,7 +334,7 @@ function renderDashboard(rows){
   var sedeEntries=Object.entries(sedesMap).sort(function(a,b){return b[1]-a[1];});
   drawDonut(sedeEntries,total);
 
-  // 3. Aceptaron contacto (col 4)
+  // 3. Aceptaron (col 4)
   var aceptoCount=0;
   for(var i=0;i<rows.length;i++){if(esAcepto(rows[i][4]))aceptoCount++;}
   var pct=total>0?Math.round((aceptoCount/total)*100):0;
@@ -311,35 +346,25 @@ function renderDashboard(rows){
   setKPI('kpi-last',shortName(last[1]),changed);
   document.getElementById('kpi-last-sub').textContent=formatTime(last[0]);
 
-  // 5. Timeline
-  var recent=rows.slice().reverse().slice(0,8);
-  document.getElementById('timeline').innerHTML=recent.map(function(r){
-    return '<div class="tl-item">'+
-      '<div class="tl-dot"></div>'+
-      '<div class="tl-name">'+shortName(r[1])+'</div>'+
-      '<div class="tl-sede">'+shortSede(r[5])+'</div>'+
-      '<div class="tl-time">'+formatTime(r[0])+'</div>'+
-    '</div>';
-  }).join('');
+  // 5. Ultimos 20
+  var recent20=rows.slice().reverse().slice(0,20);
+  document.getElementById('timeline').innerHTML=buildTimeline(recent20);
 
-  // 6. Ritmo por hora
-  var hourMap={};
-  rows.forEach(function(r){
-    var d=new Date(r[0]);
-    if(!isNaN(d.getTime())){var h=d.getHours();hourMap[h]=(hourMap[h]||0)+1;}
-  });
-  var hours=Object.keys(hourMap).map(Number).sort(function(a,b){return a-b;});
-  var maxH=hours.reduce(function(m,h){return Math.max(m,hourMap[h]);},1);
+  // 6 + 7. Ultimos 30 y 60 minutos
   var now=new Date();
-  document.getElementById('hour-chart-title').textContent=
-    'Ritmo por hora — '+now.toLocaleDateString('es-CL',{day:'numeric',month:'long'});
-  document.getElementById('hour-chart').innerHTML=hours.map(function(h){
-    return '<div class="hour-bar-wrap">'+
-      '<div class="hour-bar" style="height:'+(Math.round((hourMap[h]/maxH)*62)+4)+'px"></div>'+
-      '<div class="hour-label">'+h+'h</div>'+
-    '</div>';
-  }).join('');
+  var t30=new Date(now.getTime()-30*60*1000);
+  var t60=new Date(now.getTime()-60*60*1000);
 
+  var rows30=rows.filter(function(r){var d=new Date(r[0]);return !isNaN(d.getTime())&&d>=t30;}).reverse();
+  var rows60=rows.filter(function(r){var d=new Date(r[0]);return !isNaN(d.getTime())&&d>=t60;}).reverse();
+
+  document.getElementById('count-30').textContent=rows30.length;
+  document.getElementById('timeline-30').innerHTML=buildTimeline(rows30);
+
+  document.getElementById('count-60').textContent=rows60.length;
+  document.getElementById('timeline-60').innerHTML=buildTimeline(rows60);
+
+  // Footer
   document.getElementById('last-update').textContent=
     'Actualizado '+now.toLocaleTimeString('es-CL',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
   document.getElementById('footer-info').textContent=
@@ -350,6 +375,14 @@ async function refresh(){
   var rows=await fetchData();
   if(rows&&rows.length>0) renderDashboard(rows);
 }
+
+// Mostrar fecha inmediatamente sin esperar datos
+document.getElementById('fecha-actual').textContent=(function(){
+  var d=new Date();
+  var dias=["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
+  var meses=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+  return dias[d.getDay()]+' '+d.getDate()+' de '+meses[d.getMonth()]+' '+d.getFullYear();
+})();
 
 refresh();
 setInterval(refresh,REFRESH_MS);
