@@ -3,143 +3,112 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dashboard Registros Clinica Davila</title>
+<title>Davila en CicloRecreoVia</title>
 <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Sora:wght@300;400;600;700&display=swap" rel="stylesheet">
 <style>
   :root {
-    --bg: #0a0e1a;
-    --surface: #111827;
-    --surface2: #1a2235;
-    --border: rgba(255,255,255,0.07);
-    --accent: #00d4aa;
-    --accent2: #3b82f6;
-    --accent3: #f59e0b;
-    --text: #f1f5f9;
-    --muted: #64748b;
+    --bg: #0a0e1a; --surface: #111827; --surface2: #1a2235;
+    --border: rgba(255,255,255,0.07); --accent: #00d4aa;
+    --accent2: #3b82f6; --accent3: #f59e0b; --text: #f1f5f9; --muted: #64748b;
   }
   * { margin:0; padding:0; box-sizing:border-box; }
-  body {
-    background: var(--bg); color: var(--text);
-    font-family: 'Sora', sans-serif; min-height: 100vh; padding: 32px 24px;
-  }
+  body { background:var(--bg); color:var(--text); font-family:'Sora',sans-serif; min-height:100vh; padding:32px 24px; }
   body::before {
-    content: ''; position: fixed; inset: 0;
-    background-image:
-      linear-gradient(rgba(0,212,170,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(0,212,170,0.03) 1px, transparent 1px);
-    background-size: 40px 40px; pointer-events: none; z-index: 0;
+    content:''; position:fixed; inset:0;
+    background-image: linear-gradient(rgba(0,212,170,0.03) 1px,transparent 1px), linear-gradient(90deg,rgba(0,212,170,0.03) 1px,transparent 1px);
+    background-size:40px 40px; pointer-events:none; z-index:0;
   }
-  .container { max-width: 1100px; margin: 0 auto; position: relative; z-index: 1; }
-  header {
-    display: flex; justify-content: space-between; align-items: flex-start;
-    margin-bottom: 36px; flex-wrap: wrap; gap: 16px;
-  }
-  .brand { display: flex; align-items: center; gap: 14px; }
-  .logo-dot {
-    width: 10px; height: 10px; border-radius: 50%;
-    background: var(--accent); box-shadow: 0 0 12px var(--accent);
-    animation: pulse 2s ease-in-out infinite;
-  }
-  @keyframes pulse {
-    0%,100% { box-shadow: 0 0 8px var(--accent); opacity:1; }
-    50% { box-shadow: 0 0 20px var(--accent); opacity:0.7; }
-  }
-  h1 { font-size: 22px; font-weight: 700; letter-spacing: -0.5px; }
-  h1 span { color: var(--accent); }
-  .subtitle { font-size: 13px; color: var(--muted); margin-top: 3px; font-weight: 300; }
-  .status-bar { display: flex; flex-direction: column; align-items: flex-end; gap: 6px; }
-  .refresh-badge {
-    display: flex; align-items: center; gap: 7px;
-    background: var(--surface2); border: 1px solid var(--border);
-    border-radius: 20px; padding: 6px 14px;
-    font-family: 'DM Mono', monospace; font-size: 12px; color: var(--muted);
-  }
-  .live-dot { width: 7px; height: 7px; border-radius: 50%; background: var(--accent); animation: pulse 1.5s ease-in-out infinite; }
-  #last-update { font-size: 11px; color: var(--muted); font-family: 'DM Mono', monospace; }
-  #error-banner {
-    display: none; background: rgba(239,68,68,0.1); border: 1px solid rgba(239,68,68,0.3);
-    border-radius: 10px; padding: 12px 18px; margin-bottom: 20px; font-size: 13px; color: #fca5a5;
-  }
-  .kpi-grid {
-    display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 16px; margin-bottom: 28px;
-  }
-  .kpi-card {
-    background: var(--surface); border: 1px solid var(--border);
-    border-radius: 16px; padding: 24px 22px; position: relative; overflow: hidden;
-  }
-  .kpi-card::before {
-    content: ''; position: absolute; top: 0; left: 0; right: 0;
-    height: 2px; border-radius: 16px 16px 0 0;
-  }
-  .kpi-card.teal::before  { background: linear-gradient(90deg, var(--accent), transparent); }
-  .kpi-card.blue::before  { background: linear-gradient(90deg, var(--accent2), transparent); }
-  .kpi-card.amber::before { background: linear-gradient(90deg, var(--accent3), transparent); }
-  .kpi-card.green::before { background: linear-gradient(90deg, #22c55e, transparent); }
-  .kpi-label { font-size: 11px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: var(--muted); margin-bottom: 10px; }
-  .kpi-value {
-    font-size: 48px; font-weight: 700; letter-spacing: -2px; line-height: 1;
-    font-family: 'DM Mono', monospace; transition: all 0.4s ease;
-  }
-  .kpi-card.teal  .kpi-value { color: var(--accent); }
-  .kpi-card.blue  .kpi-value { color: var(--accent2); }
-  .kpi-card.amber .kpi-value { color: var(--accent3); }
-  .kpi-card.green .kpi-value { color: #22c55e; }
-  .kpi-sub { font-size: 12px; color: var(--muted); margin-top: 6px; font-weight: 300; }
-  @keyframes flash { 0% { transform: scale(1.08); } 100% { transform: scale(1); } }
-  .kpi-flash { animation: flash 0.6s ease; }
+  .container { max-width:1100px; margin:0 auto; position:relative; z-index:1; }
 
-  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px; }
-  @media (max-width: 700px) { .grid-2 { grid-template-columns: 1fr; } }
-  .card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 24px; }
-  .card-title { font-size: 11px; font-weight: 600; letter-spacing: 1.2px; text-transform: uppercase; color: var(--muted); margin-bottom: 20px; }
+  /* HEADER */
+  header { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:36px; flex-wrap:wrap; gap:16px; }
+  .brand { display:flex; align-items:center; gap:14px; }
+  .logo-dot { width:10px; height:10px; border-radius:50%; background:var(--accent); box-shadow:0 0 12px var(--accent); animation:pulse 2s ease-in-out infinite; }
+  @keyframes pulse { 0%,100%{box-shadow:0 0 8px var(--accent);opacity:1} 50%{box-shadow:0 0 20px var(--accent);opacity:0.7} }
+  h1 { font-size:22px; font-weight:700; letter-spacing:-0.5px; }
+  h1 span { color:var(--accent); }
+  .subtitle { font-size:13px; color:var(--muted); margin-top:3px; font-weight:300; }
+  .status-bar { display:flex; flex-direction:column; align-items:flex-end; gap:6px; }
+  .refresh-badge { display:flex; align-items:center; gap:7px; background:var(--surface2); border:1px solid var(--border); border-radius:20px; padding:6px 14px; font-family:'DM Mono',monospace; font-size:12px; color:var(--muted); }
+  .live-dot { width:7px; height:7px; border-radius:50%; background:var(--accent); animation:pulse 1.5s ease-in-out infinite; }
+  #last-update { font-size:11px; color:var(--muted); font-family:'DM Mono',monospace; }
 
-  /* Donut chart */
-  .donut-wrap { display: flex; align-items: center; gap: 28px; flex-wrap: wrap; }
-  .donut-svg { flex-shrink: 0; }
-  .donut-legend { display: flex; flex-direction: column; gap: 10px; flex: 1; min-width: 120px; }
-  .legend-item { display: flex; align-items: center; gap: 10px; }
-  .legend-dot { width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0; }
-  .legend-label { font-size: 12px; color: var(--text); flex: 1; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-  .legend-val { font-family: 'DM Mono', monospace; font-size: 12px; color: var(--muted); }
+  /* ERROR */
+  #error-banner { display:none; background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.3); border-radius:10px; padding:12px 18px; margin-bottom:20px; font-size:13px; color:#fca5a5; }
 
-  /* Timeline */
-  .timeline-list { display: flex; flex-direction: column; gap: 10px; max-height: 280px; overflow-y: auto; }
-  .timeline-list::-webkit-scrollbar { width: 4px; }
-  .timeline-list::-webkit-scrollbar-track { background: var(--surface2); }
-  .timeline-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 2px; }
-  .tl-item {
-    display: flex; align-items: center; gap: 12px; padding: 10px 12px;
-    background: var(--surface2); border-radius: 10px; font-size: 13px;
-    animation: fadeIn 0.4s ease;
+  /* CARDS */
+  .card { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:24px; margin-bottom:20px; }
+
+  /* Card title — 50% más grande que antes (era 11px → ahora 16px), color blanco */
+  .card-title { font-size:16px; font-weight:700; letter-spacing:0.5px; text-transform:uppercase; color:#ffffff; margin-bottom:20px; }
+
+  /* KPI ÚNICO (Total registros) */
+  .kpi-single {
+    background:var(--surface); border:1px solid var(--border); border-radius:16px;
+    padding:28px 28px; margin-bottom:20px; position:relative; overflow:hidden;
   }
-  @keyframes fadeIn { from { opacity:0; transform: translateY(-6px); } to { opacity:1; transform: translateY(0); } }
-  .tl-dot { width:8px; height:8px; border-radius:50%; background: var(--accent); flex-shrink:0; }
-  .tl-name { font-weight: 600; flex: 1; }
-  .tl-sede { font-size: 11px; color: var(--muted); flex: 1.5; }
-  .tl-time { font-family: 'DM Mono', monospace; font-size: 11px; color: var(--muted); flex-shrink:0; }
+  .kpi-single::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; border-radius:16px 16px 0 0; background:linear-gradient(90deg,var(--accent),var(--accent2)); }
+  .kpi-single .kpi-label { font-size:16px; font-weight:700; letter-spacing:0.5px; text-transform:uppercase; color:#ffffff; margin-bottom:12px; }
+  .kpi-single .kpi-value { font-size:72px; font-weight:700; letter-spacing:-3px; line-height:1; font-family:'DM Mono',monospace; color:var(--accent); }
+  .kpi-single .kpi-sub { font-size:13px; color:var(--muted); margin-top:8px; font-weight:300; }
 
-  /* Hour chart */
-  .hour-chart { display: flex; align-items: flex-end; gap: 4px; height: 70px; padding-top: 8px; }
-  .hour-bar-wrap { display: flex; flex-direction: column; align-items: center; flex: 1; gap: 4px; }
-  .hour-bar { width: 100%; border-radius: 3px 3px 0 0; background: var(--accent2); opacity: 0.7; min-height: 2px; transition: height 0.7s cubic-bezier(0.4,0,0.2,1); }
-  .hour-label { font-size: 9px; color: var(--muted); font-family: 'DM Mono', monospace; }
+  /* KPI DOBLE (Acepto + Ultimo) */
+  .kpi-pair { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:20px; }
+  @media(max-width:500px){ .kpi-pair{grid-template-columns:1fr;} }
+  .kpi-card { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:24px 22px; position:relative; overflow:hidden; }
+  .kpi-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; border-radius:16px 16px 0 0; }
+  .kpi-card.green::before { background:linear-gradient(90deg,#22c55e,transparent); }
+  .kpi-card.amber::before { background:linear-gradient(90deg,var(--accent3),transparent); }
+  .kpi-label { font-size:16px; font-weight:700; letter-spacing:0.5px; text-transform:uppercase; color:#ffffff; margin-bottom:10px; }
+  .kpi-value { font-size:48px; font-weight:700; letter-spacing:-2px; line-height:1; font-family:'DM Mono',monospace; }
+  .kpi-card.green .kpi-value { color:#22c55e; }
+  .kpi-card.amber .kpi-value { color:var(--accent3); font-size:22px; padding-top:6px; }
+  .kpi-sub { font-size:12px; color:var(--muted); margin-top:6px; font-weight:300; }
+  @keyframes flash { 0%{transform:scale(1.08)} 100%{transform:scale(1)} }
+  .kpi-flash { animation:flash 0.6s ease; }
 
-  footer { margin-top: 28px; text-align: center; font-size: 11px; color: var(--muted); font-family: 'DM Mono', monospace; }
-  .skeleton {
-    background: linear-gradient(90deg, var(--surface2) 25%, var(--surface) 50%, var(--surface2) 75%);
-    background-size: 200% 100%; animation: shimmer 1.5s infinite; border-radius: 4px; height: 48px; width: 60%;
-  }
-  @keyframes shimmer { 0%{background-position:200% 0} 100%{background-position:-200% 0} }
+  /* DONUT — ancho completo, leyenda abajo */
+  .donut-container { display:flex; flex-direction:column; align-items:center; gap:32px; }
+  .donut-svg-wrap { width:100%; display:flex; justify-content:center; }
+  .donut-legend { display:flex; flex-direction:row; flex-wrap:wrap; gap:16px 24px; justify-content:center; width:100%; }
+  .legend-item { display:flex; align-items:center; gap:10px; }
+  .legend-dot { width:16px; height:16px; border-radius:50%; flex-shrink:0; }
+  /* Leyenda letra el triple de grande: era ~12px → 36px */
+  .legend-label { font-size:20px; color:var(--text); white-space:nowrap; }
+  .legend-val { font-family:'DM Mono',monospace; font-size:20px; color:var(--muted); }
+
+  /* TIMELINE */
+  .timeline-list { display:flex; flex-direction:column; gap:10px; max-height:320px; overflow-y:auto; }
+  .timeline-list::-webkit-scrollbar{width:4px}
+  .timeline-list::-webkit-scrollbar-track{background:var(--surface2)}
+  .timeline-list::-webkit-scrollbar-thumb{background:var(--border);border-radius:2px}
+  .tl-item { display:flex; align-items:center; gap:12px; padding:10px 12px; background:var(--surface2); border-radius:10px; font-size:13px; animation:fadeIn 0.4s ease; }
+  @keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:translateY(0)}}
+  .tl-dot{width:8px;height:8px;border-radius:50%;background:var(--accent);flex-shrink:0}
+  .tl-name{font-weight:600;flex:1}
+  .tl-sede{font-size:11px;color:var(--muted);flex:1.5}
+  .tl-time{font-family:'DM Mono',monospace;font-size:11px;color:var(--muted);flex-shrink:0}
+
+  /* HOUR CHART */
+  .hour-chart{display:flex;align-items:flex-end;gap:4px;height:70px;padding-top:8px}
+  .hour-bar-wrap{display:flex;flex-direction:column;align-items:center;flex:1;gap:4px}
+  .hour-bar{width:100%;border-radius:3px 3px 0 0;background:var(--accent2);opacity:0.7;min-height:2px;transition:height 0.7s cubic-bezier(0.4,0,0.2,1)}
+  .hour-label{font-size:9px;color:var(--muted);font-family:'DM Mono',monospace}
+
+  footer{margin-top:28px;text-align:center;font-size:11px;color:var(--muted);font-family:'DM Mono',monospace}
+  .skeleton{background:linear-gradient(90deg,var(--surface2) 25%,var(--surface) 50%,var(--surface2) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:4px;height:60px;width:40%}
+  @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 </style>
 </head>
 <body>
 <div class="container">
+
+  <!-- HEADER -->
   <header>
     <div class="brand">
       <div class="logo-dot"></div>
       <div>
-        <h1>Puntos <span>Davila</span></h1>
+        <h1>Dávila en <span>CicloRecreoVía</span></h1>
         <div class="subtitle">Dashboard de registros en tiempo real</div>
       </div>
     </div>
@@ -151,43 +120,45 @@
 
   <div id="error-banner">No se pudo cargar la fuente de datos. Reintentando...</div>
 
-  <div class="kpi-grid">
-    <div class="kpi-card teal">
-      <div class="kpi-label">Total registros</div>
-      <div class="kpi-value" id="kpi-total"><div class="skeleton"></div></div>
-      <div class="kpi-sub" id="kpi-total-sub">&nbsp;</div>
+  <!-- 1. TOTAL REGISTROS -->
+  <div class="kpi-single">
+    <div class="kpi-label">Total registros</div>
+    <div class="kpi-value" id="kpi-total"><div class="skeleton"></div></div>
+    <div class="kpi-sub" id="kpi-total-sub">&nbsp;</div>
+  </div>
+
+  <!-- 2. REGISTROS POR PUNTO (donut) -->
+  <div class="card">
+    <div class="card-title">Registros por punto</div>
+    <div class="donut-container">
+      <div class="donut-svg-wrap">
+        <svg id="donut-svg" viewBox="0 0 300 300" style="width:100%;max-width:340px;height:auto"></svg>
+      </div>
+      <div class="donut-legend" id="donut-legend"></div>
     </div>
-    <div class="kpi-card blue">
-      <div class="kpi-label">Puntos activos</div>
-      <div class="kpi-value" id="kpi-sedes"><div class="skeleton"></div></div>
-      <div class="kpi-sub" id="kpi-sedes-sub">&nbsp;</div>
-    </div>
-    <div class="kpi-card amber">
-      <div class="kpi-label">Ultimo registro</div>
-      <div class="kpi-value" id="kpi-last" style="font-size:20px;padding-top:8px"><div class="skeleton"></div></div>
-      <div class="kpi-sub" id="kpi-last-sub">&nbsp;</div>
-    </div>
+  </div>
+
+  <!-- 3 + 4. ACEPTARON CONTACTO + ULTIMO REGISTRO -->
+  <div class="kpi-pair">
     <div class="kpi-card green">
       <div class="kpi-label">Aceptaron contacto</div>
       <div class="kpi-value" id="kpi-acepto"><div class="skeleton"></div></div>
       <div class="kpi-sub" id="kpi-acepto-sub">&nbsp;</div>
     </div>
-  </div>
-
-  <div class="grid-2">
-    <div class="card">
-      <div class="card-title">Registros por punto</div>
-      <div class="donut-wrap">
-        <svg class="donut-svg" id="donut-svg" width="140" height="140" viewBox="0 0 140 140"></svg>
-        <div class="donut-legend" id="donut-legend"></div>
-      </div>
-    </div>
-    <div class="card">
-      <div class="card-title">Ultimos registros</div>
-      <div class="timeline-list" id="timeline"></div>
+    <div class="kpi-card amber">
+      <div class="kpi-label">Ultimo registro</div>
+      <div class="kpi-value" id="kpi-last"><div class="skeleton"></div></div>
+      <div class="kpi-sub" id="kpi-last-sub">&nbsp;</div>
     </div>
   </div>
 
+  <!-- 5. ULTIMOS REGISTROS -->
+  <div class="card">
+    <div class="card-title">Ultimos registros</div>
+    <div class="timeline-list" id="timeline"></div>
+  </div>
+
+  <!-- 6. RITMO POR HORA -->
   <div class="card" style="margin-bottom:20px">
     <div class="card-title" id="hour-chart-title">Ritmo de inscripciones por hora</div>
     <div class="hour-chart" id="hour-chart"></div>
@@ -197,239 +168,191 @@
 </div>
 
 <script>
-// Columnas (0-based): 0=Timestamp, 1=Nombre, 2=Correo, 3=Celular, 4=Acepto/No acepto, 5=Punto Davila
-var CSV_URL = "https://docs.google.com/spreadsheets/d/e/2PACX-1vQWCapo26aj0cGqq_l1NLdkvhDwm-EmsQW9KD_jrTso_V9-akG2JQi09Eq-1yrgq0dWlNEPETx11LJz/pub?gid=2028590628&single=true&output=csv";
+var CSV_URL = "https://docs.google.com/spreadsheets/d/1qPi-cWSQcdvUX5ZS-kXFoyGeXhgX9iTxfPcpUz_vI2M/gviz/tq?tqx=out:csv&gid=2028590628";
 var REFRESH_MS = 30000;
 var prevTotal = null;
 
-var PROXIES = [
-  function(u) { return "https://corsproxy.io/?" + encodeURIComponent(u); },
-  function(u) { return "https://api.allorigins.win/raw?url=" + encodeURIComponent(u); },
-  function(u) { return "https://api.codetabs.com/v1/proxy?quest=" + encodeURIComponent(u); }
-];
-
-// Paleta de colores para el donut
-var COLORS = ["#00d4aa","#3b82f6","#f59e0b","#a78bfa","#f43f5e","#22c55e","#fb923c","#38bdf8"];
+// Paleta: verde→amarillo, azul→naranja, resto igual
+var COLORS = ["#00d4aa","#f97316","#f59e0b","#a78bfa","#f43f5e","#eab308","#fb923c","#38bdf8"];
 
 function splitLine(line) {
-  var cols = [], cur = "", inQ = false;
-  for (var i = 0; i < line.length; i++) {
-    var ch = line[i];
-    if (ch === '"') { inQ = !inQ; continue; }
-    if (ch === ',' && !inQ) { cols.push(cur.trim()); cur = ""; continue; }
-    cur += ch;
+  var cols=[], cur="", inQ=false;
+  for(var i=0;i<line.length;i++){
+    var ch=line[i];
+    if(ch==='"'){inQ=!inQ;continue;}
+    if(ch===','&&!inQ){cols.push(cur.trim());cur="";continue;}
+    cur+=ch;
   }
   cols.push(cur.trim());
   return cols;
 }
 
 function parseCSV(text) {
-  var lines = text.trim().split('\n');
-  var rows = [];
-  for (var i = 1; i < lines.length; i++) {
-    var line = lines[i].trim();
-    if (!line) continue;
-    var cols = splitLine(line);
-    if (cols.length < 2 || !cols[0]) continue;
+  var lines=text.trim().split('\n'), rows=[];
+  for(var i=1;i<lines.length;i++){
+    var line=lines[i].trim();
+    if(!line) continue;
+    var cols=splitLine(line);
+    if(cols.length<2||!cols[0]) continue;
     rows.push(cols);
   }
   return rows;
 }
 
-function isValidCSV(text) {
-  if (!text || text.length < 20) return false;
-  return text.split('\n')[0].split(',').length >= 3;
+function setKPI(id,val,animate){
+  var el=document.getElementById(id);
+  el.innerHTML=String(val);
+  if(animate){el.classList.remove('kpi-flash');void el.offsetWidth;el.classList.add('kpi-flash');}
 }
 
-function setKPI(id, val, animate) {
-  var el = document.getElementById(id);
-  el.innerHTML = String(val);
-  if (animate) { el.classList.remove('kpi-flash'); void el.offsetWidth; el.classList.add('kpi-flash'); }
+function shortName(s){return s?s.trim().split(' ')[0]:'-';}
+
+function formatTime(s){
+  if(!s) return '';
+  var d=new Date(s);
+  return isNaN(d.getTime())?s:d.toLocaleTimeString('es-CL',{hour:'2-digit',minute:'2-digit'});
 }
 
-function shortName(s) { return s ? s.trim().split(' ')[0] : '-'; }
-
-function formatTime(s) {
-  if (!s) return '';
-  var d = new Date(s);
-  return isNaN(d.getTime()) ? s : d.toLocaleTimeString('es-CL', {hour:'2-digit', minute:'2-digit'});
+function shortSede(s){
+  if(!s||!s.trim()) return '-';
+  var m=s.match(/^([^(]+)/);
+  return m?m[1].trim():s.trim();
 }
 
-function shortSede(s) {
-  if (!s || !s.trim()) return '-';
-  var m = s.match(/^([^(]+)/);
-  return m ? m[1].trim() : s.trim();
+function esAcepto(val){
+  return (val||'').trim().toLowerCase()==='acepto';
 }
 
-// Verifica si el valor es exactamente "acepto" (no "no acepto")
-function esAcepto(val) {
-  var v = (val || '').trim().toLowerCase();
-  // Excluye "no acepto", cuenta solo "acepto" exacto o variantes sin "no"
-  return v === 'acepto' || (v.indexOf('acept') !== -1 && v.indexOf('no ') !== 0 && v !== 'no acepto');
-}
-
-async function fetchData() {
-  for (var p = 0; p < PROXIES.length; p++) {
-    try {
-      var res = await fetch(PROXIES[p](CSV_URL), {cache: 'no-store'});
-      if (!res.ok) continue;
-      var text = await res.text();
-      if (!isValidCSV(text)) continue;
-      var rows = parseCSV(text);
-      if (rows && rows.length > 0) {
-        document.getElementById('error-banner').style.display = 'none';
-        return rows;
-      }
-    } catch(e) { continue; }
+async function fetchData(){
+  try{
+    var res=await fetch(CSV_URL+'&nocache='+Date.now());
+    if(!res.ok) throw new Error('HTTP '+res.status);
+    var text=await res.text();
+    if(!text||text.split('\n')[0].split(',').length<3) throw new Error('CSV invalido');
+    var rows=parseCSV(text);
+    if(rows&&rows.length>0){
+      document.getElementById('error-banner').style.display='none';
+      return rows;
+    }
+    throw new Error('Sin filas');
+  }catch(e){
+    document.getElementById('error-banner').style.display='block';
+    document.getElementById('error-banner').textContent='Error al cargar datos: '+e.message+'. Reintentando...';
+    return null;
   }
-  document.getElementById('error-banner').style.display = 'block';
-  return null;
 }
 
-// Dibuja donut SVG puro
-function drawDonut(entries, total) {
-  var cx = 70, cy = 70, r = 52, innerR = 34;
-  var circumference = 2 * Math.PI * r;
-  var gap = 2; // grados de separacion entre segmentos
-  var svgParts = [];
-  var legendParts = [];
+function drawDonut(entries,total){
+  var cx=150,cy=150,r=120,innerR=72,gap=1.5;
+  var svg=[];
+  // Fondo
+  svg.push('<circle cx="'+cx+'" cy="'+cy+'" r="'+r+'" fill="none" stroke="#1a2235" stroke-width="'+(r-innerR)+'"/>');
+  // Total en centro
+  svg.push('<text x="'+cx+'" y="'+(cy-10)+'" text-anchor="middle" fill="#f1f5f9" font-size="52" font-weight="700" font-family="DM Mono,monospace">'+total+'</text>');
+  svg.push('<text x="'+cx+'" y="'+(cy+22)+'" text-anchor="middle" fill="#64748b" font-size="18" font-family="Sora,sans-serif">TOTAL</text>');
 
-  // Fondo del donut
-  svgParts.push('<circle cx="' + cx + '" cy="' + cy + '" r="' + r + '" fill="none" stroke="#1a2235" stroke-width="' + (r - innerR) + '"/>');
-
-  // Total en el centro
-  svgParts.push('<text x="' + cx + '" y="' + (cy - 6) + '" text-anchor="middle" fill="#f1f5f9" font-size="22" font-weight="700" font-family="DM Mono,monospace">' + total + '</text>');
-  svgParts.push('<text x="' + cx + '" y="' + (cy + 12) + '" text-anchor="middle" fill="#64748b" font-size="9" font-family="Sora,sans-serif">TOTAL</text>');
-
-  var startAngle = -90; // empieza desde arriba
-  for (var i = 0; i < entries.length; i++) {
-    var pct = entries[i][1] / total;
-    var sweepDeg = pct * 360 - gap;
-    if (sweepDeg < 1) sweepDeg = 1;
-    var color = COLORS[i % COLORS.length];
-
-    var startRad = (startAngle) * Math.PI / 180;
-    var endRad   = (startAngle + sweepDeg) * Math.PI / 180;
-
-    var x1 = cx + r * Math.cos(startRad);
-    var y1 = cy + r * Math.sin(startRad);
-    var x2 = cx + r * Math.cos(endRad);
-    var y2 = cy + r * Math.sin(endRad);
-
-    var largeArc = sweepDeg > 180 ? 1 : 0;
-
-    var xi1 = cx + innerR * Math.cos(endRad);
-    var yi1 = cy + innerR * Math.sin(endRad);
-    var xi2 = cx + innerR * Math.cos(startRad);
-    var yi2 = cy + innerR * Math.sin(startRad);
-
-    var d = [
-      'M', x1, y1,
-      'A', r, r, 0, largeArc, 1, x2, y2,
-      'L', xi1, yi1,
-      'A', innerR, innerR, 0, largeArc, 0, xi2, yi2,
-      'Z'
-    ].join(' ');
-
-    svgParts.push('<path d="' + d + '" fill="' + color + '" opacity="0.9"/>');
-
-    startAngle += sweepDeg + gap;
-
-    // Leyenda
-    var pctStr = Math.round(pct * 100) + '%';
-    legendParts.push(
-      '<div class="legend-item">' +
-        '<div class="legend-dot" style="background:' + color + '"></div>' +
-        '<span class="legend-label" title="' + entries[i][0] + '">' + shortSede(entries[i][0]) + '</span>' +
-        '<span class="legend-val">' + entries[i][1] + ' <span style="color:#475569">(' + pctStr + ')</span></span>' +
+  var legend=[], angle=-90;
+  for(var i=0;i<entries.length;i++){
+    var pct=entries[i][1]/total;
+    var sweep=pct*360-gap;
+    if(sweep<1) sweep=1;
+    var color=COLORS[i%COLORS.length];
+    var s=angle*Math.PI/180, e=(angle+sweep)*Math.PI/180;
+    var x1=cx+r*Math.cos(s),y1=cy+r*Math.sin(s);
+    var x2=cx+r*Math.cos(e),y2=cy+r*Math.sin(e);
+    var xi1=cx+innerR*Math.cos(e),yi1=cy+innerR*Math.sin(e);
+    var xi2=cx+innerR*Math.cos(s),yi2=cy+innerR*Math.sin(s);
+    var la=sweep>180?1:0;
+    var d='M '+x1+' '+y1+' A '+r+' '+r+' 0 '+la+' 1 '+x2+' '+y2+' L '+xi1+' '+yi1+' A '+innerR+' '+innerR+' 0 '+la+' 0 '+xi2+' '+yi2+' Z';
+    svg.push('<path d="'+d+'" fill="'+color+'" opacity="0.95"/>');
+    angle+=sweep+gap;
+    legend.push(
+      '<div class="legend-item">'+
+        '<div class="legend-dot" style="background:'+color+'"></div>'+
+        '<span class="legend-label">'+shortSede(entries[i][0])+'</span>'+
+        '<span class="legend-val">&nbsp;'+entries[i][1]+'&nbsp;<span style="color:#475569">('+Math.round(pct*100)+'%)</span></span>'+
       '</div>'
     );
   }
-
-  document.getElementById('donut-svg').innerHTML = svgParts.join('');
-  document.getElementById('donut-legend').innerHTML = legendParts.join('');
+  document.getElementById('donut-svg').innerHTML=svg.join('');
+  document.getElementById('donut-legend').innerHTML=legend.join('');
 }
 
-function renderDashboard(rows) {
-  var total = rows.length;
-  var changed = prevTotal !== null && total !== prevTotal;
-  prevTotal = total;
+function renderDashboard(rows){
+  var total=rows.length;
+  var changed=prevTotal!==null&&total!==prevTotal;
+  prevTotal=total;
 
-  // KPI: Total
-  setKPI('kpi-total', total, changed);
-  document.getElementById('kpi-total-sub').textContent = 'inscripciones totales';
+  // 1. Total
+  setKPI('kpi-total',total,changed);
+  document.getElementById('kpi-total-sub').textContent='inscripciones totales';
 
-  // KPI: Sedes (col 5)
-  var sedesMap = {};
-  for (var i = 0; i < rows.length; i++) {
-    var s = (rows[i][5] || '').trim() || 'Sin especificar';
-    sedesMap[s] = (sedesMap[s] || 0) + 1;
+  // Sedes (col 5)
+  var sedesMap={};
+  for(var i=0;i<rows.length;i++){
+    var s=(rows[i][5]||'').trim()||'Sin especificar';
+    sedesMap[s]=(sedesMap[s]||0)+1;
   }
-  var sedesCount = Object.keys(sedesMap).length;
-  setKPI('kpi-sedes', sedesCount, false);
-  document.getElementById('kpi-sedes-sub').textContent = 'ubicaciones con registros';
+  var sedesCount=Object.keys(sedesMap).length;
 
-  // KPI: Ultimo registro (col 1 nombre, col 0 timestamp)
-  var last = rows[rows.length - 1];
-  setKPI('kpi-last', shortName(last[1]), changed);
-  document.getElementById('kpi-last-sub').textContent = formatTime(last[0]);
+  // 2. Donut
+  var sedeEntries=Object.entries(sedesMap).sort(function(a,b){return b[1]-a[1];});
+  drawDonut(sedeEntries,total);
 
-  // KPI: Aceptaron contacto (col 4) — excluye "No acepto"
-  var aceptoCount = 0;
-  for (var i = 0; i < rows.length; i++) {
-    if (esAcepto(rows[i][4])) aceptoCount++;
-  }
-  var pct = total > 0 ? Math.round((aceptoCount / total) * 100) : 0;
-  setKPI('kpi-acepto', pct + '%', changed);
-  document.getElementById('kpi-acepto-sub').textContent = aceptoCount + ' de ' + total + ' personas';
+  // 3. Aceptaron contacto (col 4)
+  var aceptoCount=0;
+  for(var i=0;i<rows.length;i++){if(esAcepto(rows[i][4]))aceptoCount++;}
+  var pct=total>0?Math.round((aceptoCount/total)*100):0;
+  setKPI('kpi-acepto',pct+'%',changed);
+  document.getElementById('kpi-acepto-sub').textContent=aceptoCount+' de '+total+' personas';
 
-  // Donut por sede
-  var sedeEntries = Object.entries(sedesMap).sort(function(a,b){ return b[1]-a[1]; });
-  drawDonut(sedeEntries, total);
+  // 4. Ultimo registro
+  var last=rows[rows.length-1];
+  setKPI('kpi-last',shortName(last[1]),changed);
+  document.getElementById('kpi-last-sub').textContent=formatTime(last[0]);
 
-  // Timeline (ultimos 8)
-  var recent = rows.slice().reverse().slice(0, 8);
-  document.getElementById('timeline').innerHTML = recent.map(function(r) {
-    return '<div class="tl-item">' +
-      '<div class="tl-dot"></div>' +
-      '<div class="tl-name">' + shortName(r[1]) + '</div>' +
-      '<div class="tl-sede">' + shortSede(r[5]) + '</div>' +
-      '<div class="tl-time">' + formatTime(r[0]) + '</div>' +
+  // 5. Timeline
+  var recent=rows.slice().reverse().slice(0,8);
+  document.getElementById('timeline').innerHTML=recent.map(function(r){
+    return '<div class="tl-item">'+
+      '<div class="tl-dot"></div>'+
+      '<div class="tl-name">'+shortName(r[1])+'</div>'+
+      '<div class="tl-sede">'+shortSede(r[5])+'</div>'+
+      '<div class="tl-time">'+formatTime(r[0])+'</div>'+
     '</div>';
   }).join('');
 
-  // Chart por hora
-  var hourMap = {};
-  rows.forEach(function(r) {
-    var d = new Date(r[0]);
-    if (!isNaN(d.getTime())) { var h = d.getHours(); hourMap[h] = (hourMap[h]||0)+1; }
+  // 6. Ritmo por hora
+  var hourMap={};
+  rows.forEach(function(r){
+    var d=new Date(r[0]);
+    if(!isNaN(d.getTime())){var h=d.getHours();hourMap[h]=(hourMap[h]||0)+1;}
   });
-  var hours = Object.keys(hourMap).map(Number).sort(function(a,b){return a-b;});
-  var maxH = hours.reduce(function(m,h){ return Math.max(m, hourMap[h]); }, 1);
-  var now = new Date();
-  document.getElementById('hour-chart-title').textContent =
-    'Ritmo por hora - ' + now.toLocaleDateString('es-CL', {day:'numeric', month:'long'});
-  document.getElementById('hour-chart').innerHTML = hours.map(function(h) {
-    return '<div class="hour-bar-wrap">' +
-      '<div class="hour-bar" style="height:' + (Math.round((hourMap[h]/maxH)*62)+4) + 'px"></div>' +
-      '<div class="hour-label">' + h + 'h</div>' +
+  var hours=Object.keys(hourMap).map(Number).sort(function(a,b){return a-b;});
+  var maxH=hours.reduce(function(m,h){return Math.max(m,hourMap[h]);},1);
+  var now=new Date();
+  document.getElementById('hour-chart-title').textContent=
+    'Ritmo por hora — '+now.toLocaleDateString('es-CL',{day:'numeric',month:'long'});
+  document.getElementById('hour-chart').innerHTML=hours.map(function(h){
+    return '<div class="hour-bar-wrap">'+
+      '<div class="hour-bar" style="height:'+(Math.round((hourMap[h]/maxH)*62)+4)+'px"></div>'+
+      '<div class="hour-label">'+h+'h</div>'+
     '</div>';
   }).join('');
 
-  // Timestamps
-  document.getElementById('last-update').textContent =
-    'Actualizado ' + now.toLocaleTimeString('es-CL', {hour:'2-digit', minute:'2-digit', second:'2-digit'});
-  document.getElementById('footer-info').textContent =
-    total + ' registros - ' + sedesCount + ' puntos - ' + now.toLocaleDateString('es-CL');
+  document.getElementById('last-update').textContent=
+    'Actualizado '+now.toLocaleTimeString('es-CL',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  document.getElementById('footer-info').textContent=
+    total+' registros — '+sedesCount+' puntos — '+now.toLocaleDateString('es-CL');
 }
 
-async function refresh() {
-  var rows = await fetchData();
-  if (rows && rows.length > 0) renderDashboard(rows);
+async function refresh(){
+  var rows=await fetchData();
+  if(rows&&rows.length>0) renderDashboard(rows);
 }
 
 refresh();
-setInterval(refresh, REFRESH_MS);
+setInterval(refresh,REFRESH_MS);
 </script>
 </body>
 </html>
