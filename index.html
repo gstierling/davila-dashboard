@@ -4,13 +4,12 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Davila en CicloRecreoVia</title>
-<!-- Nunito: tipografía moderna sin ceros con línea vertical -->
-<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&family=Nunito+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;600;700;800&display=swap" rel="stylesheet">
 <style>
   :root {
     --bg: #0a0e1a; --surface: #111827; --surface2: #1a2235;
     --border: rgba(255,255,255,0.07); --accent: #00d4aa;
-    --accent2: #f97316; --accent3: #f59e0b; --text: #f1f5f9; --muted: #ffffff;
+    --accent2: #f97316; --accent3: #f59e0b; --text: #f1f5f9;
   }
   * { margin:0; padding:0; box-sizing:border-box; }
   body {
@@ -21,45 +20,36 @@
   }
   body::before {
     content:''; position:fixed; inset:0;
-    background-image: linear-gradient(rgba(0,212,170,0.03) 1px,transparent 1px), linear-gradient(90deg,rgba(0,212,170,0.03) 1px,transparent 1px);
+    background-image: linear-gradient(rgba(0,212,170,0.03) 1px,transparent 1px),
+      linear-gradient(90deg,rgba(0,212,170,0.03) 1px,transparent 1px);
     background-size:40px 40px; pointer-events:none; z-index:0;
   }
   .container { max-width:680px; margin:0 auto; position:relative; z-index:1; }
 
-  /* HEADER */
   header { margin-bottom:28px; }
   .logo-dot-wrap { display:flex; justify-content:center; margin-bottom:10px; }
   .logo-dot { width:10px; height:10px; border-radius:50%; background:var(--accent); box-shadow:0 0 12px var(--accent); animation:pulse 2s ease-in-out infinite; }
   @keyframes pulse { 0%,100%{box-shadow:0 0 8px var(--accent);opacity:1} 50%{box-shadow:0 0 22px var(--accent);opacity:0.7} }
-  h1 { font-size:24px; font-weight:800; letter-spacing:-0.5px; }
+  h1 { font-size:24px; font-weight:800; }
   h1 span { color:var(--accent); }
-  .subtitle { font-size:13px; color:rgba(255,255,255,0.55); margin-top:4px; font-weight:400; }
+  .subtitle { font-size:13px; color:rgba(255,255,255,0.55); margin-top:4px; }
   .refresh-badge { display:inline-flex; align-items:center; gap:7px; background:var(--surface2); border:1px solid var(--border); border-radius:20px; padding:5px 14px; font-size:12px; color:rgba(255,255,255,0.55); margin-top:10px; }
   .live-dot { width:7px; height:7px; border-radius:50%; background:var(--accent); animation:pulse 1.5s ease-in-out infinite; }
   #last-update { font-size:11px; color:rgba(255,255,255,0.4); margin-top:6px; }
 
-  /* FECHA ACTUAL */
-  #fecha-actual {
-    font-size:17px; font-weight:700; color:#ffffff;
-    margin-bottom:14px; letter-spacing:0.3px;
-    text-transform:capitalize;
-  }
+  #fecha-actual { font-size:17px; font-weight:700; color:#ffffff; margin-bottom:14px; text-transform:capitalize; }
 
-  /* ERROR */
   #error-banner { display:none; background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.3); border-radius:10px; padding:12px 18px; margin-bottom:20px; font-size:13px; color:#fca5a5; }
 
-  /* CARDS */
   .card { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:24px 20px; margin-bottom:18px; }
-  .card-title { font-size:16px; font-weight:800; letter-spacing:0.4px; text-transform:uppercase; color:#ffffff; margin-bottom:18px; }
+  .card-title { font-size:16px; font-weight:800; text-transform:uppercase; color:#ffffff; margin-bottom:18px; letter-spacing:0.4px; }
 
-  /* KPI TOTAL */
   .kpi-single { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:28px 20px; margin-bottom:18px; position:relative; overflow:hidden; }
   .kpi-single::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; border-radius:16px 16px 0 0; background:linear-gradient(90deg,var(--accent),var(--accent2)); }
   .kpi-single .kpi-label { font-size:16px; font-weight:800; text-transform:uppercase; color:#ffffff; margin-bottom:12px; letter-spacing:0.4px; }
   .kpi-single .kpi-value { font-size:80px; font-weight:800; line-height:1; color:var(--accent); }
   .kpi-single .kpi-sub { font-size:14px; color:#ffffff; margin-top:8px; font-weight:600; }
 
-  /* KPI PAIR */
   .kpi-pair { display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-bottom:18px; }
   @media(max-width:480px){ .kpi-pair{grid-template-columns:1fr;} }
   .kpi-card { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:22px 18px; position:relative; overflow:hidden; }
@@ -74,7 +64,6 @@
   @keyframes flash { 0%{transform:scale(1.08)} 100%{transform:scale(1)} }
   .kpi-flash { animation:flash 0.6s ease; }
 
-  /* DONUT */
   .donut-container { display:flex; flex-direction:column; align-items:center; gap:28px; }
   .donut-svg-wrap { width:100%; display:flex; justify-content:center; }
   .donut-legend { display:flex; flex-direction:column; gap:14px; align-items:flex-start; width:100%; padding:0 8px; }
@@ -84,7 +73,6 @@
   .legend-val { font-size:20px; font-weight:600; color:#ffffff; margin-left:4px; }
   .legend-pct { font-size:18px; color:rgba(255,255,255,0.55); margin-left:4px; }
 
-  /* TIMELINE */
   .timeline-list { display:flex; flex-direction:column; gap:8px; max-height:520px; overflow-y:auto; }
   .timeline-list::-webkit-scrollbar{width:4px}
   .timeline-list::-webkit-scrollbar-track{background:var(--surface2)}
@@ -96,16 +84,9 @@
   .tl-sede{font-size:11px;color:rgba(255,255,255,0.7);flex:1.5}
   .tl-time{font-size:11px;color:rgba(255,255,255,0.6);flex-shrink:0}
 
-  /* BADGE conteo */
-  .count-badge {
-    display:inline-block; background:var(--accent); color:#0a0e1a;
-    font-size:28px; font-weight:800; border-radius:12px;
-    padding:8px 24px; margin-bottom:16px;
-  }
-  .no-data { color:rgba(255,255,255,0.45); font-size:14px; padding:12px 0; }
+  .count-badge { display:inline-block; background:var(--accent); color:#0a0e1a; font-size:56px; font-weight:800; border-radius:16px; padding:12px 40px; }
 
   footer{margin-top:24px;font-size:11px;color:rgba(255,255,255,0.35);}
-
   .skeleton{display:inline-block;background:linear-gradient(90deg,var(--surface2) 25%,var(--surface) 50%,var(--surface2) 75%);background-size:200% 100%;animation:shimmer 1.5s infinite;border-radius:8px;height:64px;width:120px;}
   @keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
 </style>
@@ -113,7 +94,6 @@
 <body>
 <div class="container">
 
-  <!-- HEADER -->
   <header>
     <div class="logo-dot-wrap"><div class="logo-dot"></div></div>
     <h1>Dávila en <span>CicloRecreoVía</span></h1>
@@ -122,9 +102,8 @@
     <div id="last-update">Cargando...</div>
   </header>
 
-  <div id="error-banner">No se pudo cargar la fuente de datos. Reintentando...</div>
+  <div id="error-banner"></div>
 
-  <!-- FECHA ACTUAL -->
   <div id="fecha-actual"></div>
 
   <!-- 1. TOTAL REGISTROS -->
@@ -167,16 +146,14 @@
 
   <!-- 6. ULTIMOS 30 MINUTOS -->
   <div class="card">
-    <div class="card-title">Registros ultimos 30 minutos</div>
+    <div class="card-title">Registros últimos 30 minutos</div>
     <div class="count-badge" id="count-30">—</div>
-    <div class="timeline-list" id="timeline-30"></div>
   </div>
 
   <!-- 7. ULTIMOS 60 MINUTOS -->
   <div class="card">
-    <div class="card-title">Registros ultimos 60 minutos</div>
+    <div class="card-title">Registros últimos 60 minutos</div>
     <div class="count-badge" id="count-60">—</div>
-    <div class="timeline-list" id="timeline-60"></div>
   </div>
 
   <footer id="footer-info">Cargando...</footer>
@@ -186,15 +163,28 @@
 var CSV_URL = "https://docs.google.com/spreadsheets/d/1qPi-cWSQcdvUX5ZS-kXFoyGeXhgX9iTxfPcpUz_vI2M/gviz/tq?tqx=out:csv&gid=2028590628";
 var REFRESH_MS = 30000;
 var prevTotal = null;
-// Verde→amarillo, azul→naranja
 var COLORS = ["#00d4aa","#f97316","#eab308","#a78bfa","#f43f5e","#e879f9","#fb923c","#38bdf8"];
 
-// Fecha actual en español
-function fechaHoy() {
-  var d = new Date();
-  var dias = ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
-  var meses = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
-  return dias[d.getDay()] + ' ' + d.getDate() + ' de ' + meses[d.getMonth()] + ' ' + d.getFullYear();
+// Parser de fecha formato chileno: "1/5/2026 10:13:41" o "01/05/2026 10:13:41"
+// Google Sheets en es-CL exporta D/M/YYYY H:MM:SS
+function parseSheetDate(s) {
+  if (!s) return null;
+  // Intenta primero parseo nativo
+  var d = new Date(s);
+  if (!isNaN(d.getTime()) && d.getFullYear() > 2000) return d;
+  // Parser manual para D/M/YYYY H:MM:SS o D/M/YYYY H:MM
+  var m = s.match(/^(\d{1,2})\/(\d{1,2})\/(\d{4})\s+(\d{1,2}):(\d{2})(?::(\d{2}))?/);
+  if (m) {
+    return new Date(
+      parseInt(m[3]),   // year
+      parseInt(m[2])-1, // month (0-based)
+      parseInt(m[1]),   // day
+      parseInt(m[4]),   // hour
+      parseInt(m[5]),   // minute
+      parseInt(m[6]||0) // second
+    );
+  }
+  return null;
 }
 
 function splitLine(line) {
@@ -230,9 +220,8 @@ function setKPI(id,val,animate){
 function shortName(s){return s?s.trim().split(' ')[0]:'-';}
 
 function formatTime(s){
-  if(!s) return '';
-  var d=new Date(s);
-  return isNaN(d.getTime())?s:d.toLocaleTimeString('es-CL',{hour:'2-digit',minute:'2-digit'});
+  var d=parseSheetDate(s);
+  return d?d.toLocaleTimeString('es-CL',{hour:'2-digit',minute:'2-digit'}):s;
 }
 
 function shortSede(s){
@@ -246,7 +235,7 @@ function esAcepto(val){
 }
 
 function buildTimeline(rows) {
-  if(!rows||rows.length===0) return '<div class="no-data">Sin registros</div>';
+  if(!rows||rows.length===0) return '<div style="color:rgba(255,255,255,0.45);font-size:14px;padding:12px 0">Sin registros</div>';
   return rows.map(function(r){
     return '<div class="tl-item">'+
       '<div class="tl-dot"></div>'+
@@ -270,8 +259,9 @@ async function fetchData(){
     }
     throw new Error('Sin filas');
   }catch(e){
-    document.getElementById('error-banner').style.display='block';
-    document.getElementById('error-banner').textContent='Error: '+e.message+'. Reintentando...';
+    var eb=document.getElementById('error-banner');
+    eb.style.display='block';
+    eb.textContent='Error: '+e.message+'. Reintentando...';
     return null;
   }
 }
@@ -310,12 +300,18 @@ function drawDonut(entries,total){
   document.getElementById('donut-legend').innerHTML=legend.join('');
 }
 
+function fechaHoy(){
+  var d=new Date();
+  var dias=["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
+  var meses=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+  return dias[d.getDay()]+' '+d.getDate()+' de '+meses[d.getMonth()]+' '+d.getFullYear();
+}
+
 function renderDashboard(rows){
   var total=rows.length;
   var changed=prevTotal!==null&&total!==prevTotal;
   prevTotal=total;
 
-  // Fecha
   document.getElementById('fecha-actual').textContent=fechaHoy();
 
   // 1. Total
@@ -350,39 +346,35 @@ function renderDashboard(rows){
   var recent20=rows.slice().reverse().slice(0,20);
   document.getElementById('timeline').innerHTML=buildTimeline(recent20);
 
-  // 6 + 7. Ultimos 30 y 60 minutos
+  // 6+7. Conteo 30 y 60 minutos usando parseSheetDate
   var now=new Date();
   var t30=new Date(now.getTime()-30*60*1000);
   var t60=new Date(now.getTime()-60*60*1000);
 
-  var rows30=rows.filter(function(r){var d=new Date(r[0]);return !isNaN(d.getTime())&&d>=t30;}).reverse();
-  var rows60=rows.filter(function(r){var d=new Date(r[0]);return !isNaN(d.getTime())&&d>=t60;}).reverse();
+  var count30=0, count60=0;
+  for(var i=0;i<rows.length;i++){
+    var d=parseSheetDate(rows[i][0]);
+    if(d){
+      if(d>=t60) count60++;
+      if(d>=t30) count30++;
+    }
+  }
 
-  document.getElementById('count-30').textContent=rows30.length;
-  document.getElementById('timeline-30').innerHTML=buildTimeline(rows30);
+  document.getElementById('count-30').textContent=count30;
+  document.getElementById('count-60').textContent=count60;
 
-  document.getElementById('count-60').textContent=rows60.length;
-  document.getElementById('timeline-60').innerHTML=buildTimeline(rows60);
-
-  // Footer
-  document.getElementById('last-update').textContent=
-    'Actualizado '+now.toLocaleTimeString('es-CL',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
-  document.getElementById('footer-info').textContent=
-    total+' registros — '+sedesCount+' puntos — '+now.toLocaleDateString('es-CL');
+  var nowStr=now.toLocaleTimeString('es-CL',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  document.getElementById('last-update').textContent='Actualizado '+nowStr;
+  document.getElementById('footer-info').textContent=total+' registros — '+sedesCount+' puntos — '+now.toLocaleDateString('es-CL');
 }
+
+// Mostrar fecha de inmediato
+document.getElementById('fecha-actual').textContent=fechaHoy();
 
 async function refresh(){
   var rows=await fetchData();
   if(rows&&rows.length>0) renderDashboard(rows);
 }
-
-// Mostrar fecha inmediatamente sin esperar datos
-document.getElementById('fecha-actual').textContent=(function(){
-  var d=new Date();
-  var dias=["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
-  var meses=["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
-  return dias[d.getDay()]+' '+d.getDate()+' de '+meses[d.getMonth()]+' '+d.getFullYear();
-})();
 
 refresh();
 setInterval(refresh,REFRESH_MS);
