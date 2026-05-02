@@ -46,11 +46,11 @@
   #error-banner { display:none; background:rgba(239,68,68,0.1); border:1px solid rgba(239,68,68,0.3); border-radius:10px; padding:12px 18px; margin-bottom:20px; font-size:13px; color:#fca5a5; }
 
   .card { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:24px 20px; margin-bottom:18px; }
-  .card-title { font-size:24px; font-weight:800; text-transform:uppercase; color:#ffffff; margin-bottom:18px; letter-spacing:0.4px; }
+  .card-title { font-size:18px; font-weight:800; text-transform:uppercase; color:#ffffff; margin-bottom:18px; letter-spacing:0.4px; }
 
   .kpi-single { background:var(--surface); border:1px solid var(--border); border-radius:16px; padding:28px 20px; margin-bottom:18px; position:relative; overflow:hidden; }
   .kpi-single::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; border-radius:16px 16px 0 0; background:linear-gradient(90deg,var(--accent),var(--accent2)); }
-  .kpi-single .kpi-label { font-size:24px; font-weight:800; text-transform:uppercase; color:#ffffff; margin-bottom:12px; letter-spacing:0.4px; }
+  .kpi-single .kpi-label { font-size:18px; font-weight:800; text-transform:uppercase; color:#ffffff; margin-bottom:12px; letter-spacing:0.4px; }
   .kpi-single .kpi-value { font-size:80px; font-weight:800; line-height:1; color:var(--accent); }
   .kpi-single .kpi-sub { font-size:14px; color:#ffffff; margin-top:8px; font-weight:600; }
 
@@ -60,7 +60,7 @@
   .kpi-card::before { content:''; position:absolute; top:0; left:0; right:0; height:2px; border-radius:16px 16px 0 0; }
   .kpi-card.green::before { background:linear-gradient(90deg,#22c55e,transparent); }
   .kpi-card.amber::before { background:linear-gradient(90deg,var(--accent3),transparent); }
-  .kpi-label { font-size:23px; font-weight:800; text-transform:uppercase; color:#ffffff; margin-bottom:10px; letter-spacing:0.3px; }
+  .kpi-label { font-size:17px; font-weight:800; text-transform:uppercase; color:#ffffff; margin-bottom:10px; letter-spacing:0.3px; }
   .kpi-value { font-size:52px; font-weight:800; line-height:1; }
   .kpi-card.green .kpi-value { color:#22c55e; }
   .kpi-card.amber .kpi-value { color:var(--accent3); font-size:24px; padding-top:6px; }
@@ -131,7 +131,7 @@
   <!-- 3+4. ACEPTARON + ULTIMO -->
   <div class="kpi-pair">
     <div class="kpi-card green">
-      <div class="kpi-label">Aceptaron contacto</div>
+      <div class="kpi-label">Aceptaron ser contactados</div>
       <div class="kpi-value" id="kpi-acepto"><div class="skeleton" style="height:48px;width:80px"></div></div>
       <div class="kpi-sub" id="kpi-acepto-sub">&nbsp;</div>
     </div>
@@ -163,15 +163,15 @@
 
   <!-- LINKS -->
   <div style="display:flex;justify-content:center;gap:24px;margin:24px 0 8px;">
-    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdiKZr5H_wMLyKWqrLNTd75SL4xqeFlHjeoVkmW9C0ae3_wSA/viewform"
+    <a href="https://docs.google.com/forms/d/e/1FAIpQLSdiKZr5H_wMLyKWqrLNTd75SL4xqeFlHjeoVkmW9C0ae3_wSA/viewform?usp=dialog"
        target="_blank"
-       style="display:inline-block;background:#f97316;color:#0a0e1a;font-family:Nunito,sans-serif;font-size:18px;font-weight:800;padding:14px 32px;border-radius:12px;text-decoration:none;letter-spacing:0.3px;">
+       style="display:inline-block;background:var(--surface2);border:1px solid var(--border);color:#ffffff;font-family:Nunito,sans-serif;font-size:18px;font-weight:800;padding:14px 32px;border-radius:12px;text-decoration:none;letter-spacing:0.3px;">
       Formulario
     </a>
     <a href="https://docs.google.com/spreadsheets/d/1qPi-cWSQcdvUX5ZS-kXFoyGeXhgX9iTxfPcpUz_vI2M/edit?usp=sharing"
        target="_blank"
        style="display:inline-block;background:var(--surface2);border:1px solid var(--border);color:#ffffff;font-family:Nunito,sans-serif;font-size:18px;font-weight:800;padding:14px 32px;border-radius:12px;text-decoration:none;letter-spacing:0.3px;">
-      Base de datos
+      BBDD
     </a>
   </div>
 
